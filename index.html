@@ -151,7 +151,6 @@ h1{
     0 4px 12px rgba(0,0,0,.12);
     transform:translateY(-2px);
 }
-``
 .numero{
     font-size:28px;
     font-weight:700;
@@ -467,6 +466,18 @@ function cargarLineasNegocio(){
         `;
     });
 }
+function aplicarFiltroEstatus(){
+    if(filtroEstatus === ""){
+        renderizar(datos);
+        return;
+    }
+    const filtrados = datos.filter(item =>
+        (item.estatus || "").trim()
+        ===
+        filtroEstatus
+    );
+    renderizar(filtrados);
+}
 function renderizar(lista){
     const ordenPrioridad = {
         "MUY ALTA": 1,
@@ -656,9 +667,20 @@ document.getElementById("card-total")
 });
 document.getElementById("card-po")
 .addEventListener("click",()=>{
-    filtroEstatus = "Pendiente de score";
     activarTarjeta("card-po");
-    aplicarFiltroEstatus();
+    const filtrados = datos.filter(item => {
+        const estatus =
+            (item.estatus || "").trim();
+        return ![
+            "En desarrollo",
+            "En pruebas",
+            "Listo para sprint",
+            "En estructuración",
+            "Cancelado"
+        ].includes(estatus);
+    });
+    renderizar(filtrados);
+});
 });
 document.getElementById("card-estructura")
 .addEventListener("click",()=>{
