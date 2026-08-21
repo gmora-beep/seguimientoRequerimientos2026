@@ -1,14 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Seguimiento de Requerimientos</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:Segoe UI, Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+h1{
+    color:#004481;
+}
+
+.cards{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:white;
+    min-width:180px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.numero{
+    font-size:34px;
+    font-weight:bold;
+    color:#004481;
+}
+
+input{
+    width:100%;
+    box-sizing:border-box;
+    padding:12px;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th{
+    background:#004481;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f5f9ff;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Seguimiento de Requerimientos</h1>
+
+<div class="cards">
+
+    <div class="card">
+        <div>Total</div>
+        <div id="total" class="numero">0</div>
+    </div>
+
+    <div class="card">
+        <div>En Desarrollo</div>
+        <div id="desarrollo" class="numero">0</div>
+    </div>
+
+    <div class="card">
+        <div>En Pruebas</div>
+        <div id="pruebas" class="numero">0</div>
+    </div>
+
+    <div class="card">
+        <div>Listo para Sprint</div>
+        <div id="sprint" class="numero">0</div>
+    </div>
+
+</div>
+
+<input
+id="buscar"
+placeholder="Buscar requerimiento, responsable o equipo..."
+>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Requerimiento</th>
+<th>Responsable</th>
+<th>Prioridad</th>
+<th>Estatus</th>
+<th>Equipo</th>
+</tr>
+</thead>
+
+<tbody id="tabla"></tbody>
+
+</table>
+
 <script>
-fetch("https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h_7UwQqZsw7AHmXiXamQDLFNb_vxDEF-S6ekp/exec")
-  .then(r => r.json())
-  .then(data => {
-      console.log("DATOS:", data);
-      document.body.insertAdjacentHTML(
-        "beforeend",
-        "<h2>Registros: " + data.length + "</h2>"
-      );
-  })
-  .catch(error => {
-      console.error("ERROR:", error);
-  });
+
+let datos = [];
+
+function cargarDatos(data){
+
+    datos = data;
+
+    renderizar(data);
+
+}
+
+function renderizar(lista){
+
+    const tabla =
+        document.getElementById("tabla");
+
+    tabla.innerHTML = "";
+
+    let desarrollo = 0;
+    let pruebas = 0;
+    let sprint = 0;
+
+    lista.forEach(item=>{
+
+        if(item.estatus === "En desarrollo")
+            desarrollo++;
+
+        if(item.estatus === "En pruebas")
+            pruebas++;
+
+        if(item.estatus === "Listo para sprint")
+            sprint++;
+
+        tabla.innerHTML += `
+        <tr>
+            <td>${item.id || ""}</td>
+            <td>${item.nombre || ""}</td>
+            <td>${item.responsable || ""}</td>
+            <td>${item.prioridad || ""}</td>
+            <td>${item.estatus || ""}</td>
+            <td>${item.equipo || ""}</td>
+        </tr>
+        `;
+    });
+
+    document.getElementById("total").innerText =
+        lista.length;
+
+    document.getElementById("desarrollo").innerText =
+        desarrollo;
+
+    document.getElementById("pruebas").innerText =
+        pruebas;
+
+    document.getElementById("sprint").innerText =
+        sprint;
+}
+
+document
+.getElementById("buscar")
+.addEventListener("input",function(){
+
+    const texto =
+        this.value.toLowerCase();
+
+    const filtrados =
+        datos.filter(x =>
+            JSON.stringify(x)
+            .toLowerCase()
+            .includes(texto)
+        );
+
+    renderizar(filtrados);
+});
+
 </script>
+
+https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h_7UwQqZsw7AHmXiXamQDLFNb_vxDEF-S6ekp/exec?callback=cargarDatosscript>
+
+</body>
+</html>
