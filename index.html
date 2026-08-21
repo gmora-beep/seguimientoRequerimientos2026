@@ -81,18 +81,53 @@ h1{
 
 .card{
     background:white;
-    padding:20px;
-    min-width:200px;
-    border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
+    border-radius:16px;
+    min-width:220px;
+    padding:14px 18px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    border-top:5px solid #01244a;
+    position:relative;
+}
+.card-total{
+    border-top-color:#01244a;
+}
+.card-desarrollo{
+    border-top-color:#0f8f3f;
+}
+.card-pruebas{
+    border-top-color:#66708c;
+}
+.card-sprint{
+    border-top-color:#0e8a97;
+}
+.card-titulo{
+    font-size:12px;
+    font-weight:700;
+    color:#667085;
+    text-transform:uppercase;
+    margin-bottom:8px;
 }
 
+.card-subtitulo{
+    margin-top:4px;
+    font-size:14px;
+    font-weight:600;
+}
+.card-barra{
+    margin-top:10px;
+    height:5px;
+    background:#e5e7eb;
+    border-radius:10px;
+}
+.card-barra span{
+    display:block;
+    height:100%;
+    border-radius:10px;
+}
 .numero{
-    font-size:36px;
-    font-weight:bold;
+    font-size:54px;
+    font-weight:700;
     color:#004481;
-    margin-top:3px;
-    font-weight:500;
 }
 
 input{
@@ -161,24 +196,72 @@ tr:hover{
 
 <div class="cards">
 
-    <div class="card">
-        <div>Total</div>
+    <div class="card card-total">
+
+        <div class="card-titulo">
+            Total requerimientos
+        </div>
+
         <div class="numero" id="total">0</div>
+
+        <div class="card-subtitulo">
+            Iniciativas registradas
+        </div>
+
+        <div class="card-barra">
+            <span style="width:100%;background:#01244a;"></span>
+        </div>
+
     </div>
 
-    <div class="card">
-        <div>En Desarrollo</div>
+    <div class="card card-desarrollo">
+
+        <div class="card-titulo">
+            En desarrollo
+        </div>
+
         <div class="numero" id="desarrollo">0</div>
+
+        <div class="card-subtitulo">
+            Desarrollo activo
+        </div>
+
+        <div class="card-barra">
+            <span style="width:100%;background:#0f8f3f;"></span>
+        </div>
+
     </div>
 
-    <div class="card">
-        <div>En Pruebas</div>
+    <div class="card card-pruebas">
+
+        <div class="card-titulo">
+            En pruebas
+        </div>
+
         <div class="numero" id="pruebas">0</div>
+
+        <div class="card-subtitulo">
+            Validación funcional
+        </div>
+
+        <div class="card-barra">
+            <span style="width:100%;background:#66708c;"></span>
+        </div>
+
     </div>
 
-    <div class="card">
-        <div>Listo para Sprint</div>
+    <div class="card card-sprint">
+        <div class="card-titulo">
+            Listo para sprint
+        </div>
         <div class="numero" id="sprint">0</div>
+        <div class="card-subtitulo">
+            Pendiente de planificación
+        </div>
+        <div class="card-barra">
+            <span style="width:100%;background:#0e8a97;"></span>
+        </div>
+
     </div>
 
 </div>
