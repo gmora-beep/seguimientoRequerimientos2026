@@ -324,9 +324,8 @@ let datos = [];
 function cargarDatos(data){
 
     datos = data;
-
+    console.log(datos);
     cargarLineasNegocio();
-
     renderizar(data);
 }
 function cargarLineasNegocio(){
@@ -412,22 +411,24 @@ document.getElementById("input")
 document
 .getElementById("filtroNegocio")
 .addEventListener("change", function(){
-
-    const lineaSeleccionada = this.value;
-
+    const lineaSeleccionada =
+        this.value.trim();
     if(lineaSeleccionada === ""){
-
         renderizar(datos);
         return;
     }
-
     const filtrados =
         datos.filter(item =>
-            item.negocio === lineaSeleccionada
+            (item.negocio || "")
+            .trim()
+            .toLowerCase()
+            ===
+            lineaSeleccionada
+            .toLowerCase()
         );
-
     renderizar(filtrados);
 });
+    
 </script>
 
 <script>
