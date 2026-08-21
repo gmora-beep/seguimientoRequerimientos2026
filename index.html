@@ -120,7 +120,6 @@ h1{
     text-transform:uppercase;
     margin-bottom:8px;
 }
-
 .card-subtitulo{
     margin-top:4px;
     font-size:12px;
@@ -138,6 +137,21 @@ h1{
     height:100%;
     border-radius:10px;
 }
+.card{
+    cursor:pointer;
+    transition:.2s;
+}
+.card:hover{
+    transform:translateY(-2px);
+}
+.card-activa{
+    background:#eef6ff;
+    box-shadow:
+    0 0 0 3px rgba(1,36,74,.15),
+    0 4px 12px rgba(0,0,0,.12);
+    transform:translateY(-2px);
+}
+``
 .numero{
     font-size:28px;
     font-weight:700;
@@ -332,7 +346,7 @@ tr:hover{
 
 <div class="cards">
 
-    <div class="card card-total">
+    <div class="card card-total" id="card-total">
         <div class="card-titulo">Total requerimientos</div>
         <div class="numero" id="total">0</div>
         <div class="card-subtitulo">Iniciativas registradas</div>
@@ -341,7 +355,7 @@ tr:hover{
         </div>
     </div>
 
-    <div class="card card-po">
+    <div class="card card-po" id="card-po">
         <div class="card-titulo">Revisión PO</div>
         <div class="numero" id="revisionpo">0</div>
         <div class="card-subtitulo">Análisis funcional</div>
@@ -350,7 +364,7 @@ tr:hover{
         </div>
     </div>
 
-    <div class="card card-estructura">
+    <div class="card card-estructura" id="card-estructura">
         <div class="card-titulo">En estructuración</div>
         <div class="numero" id="estructuracion">0</div>
         <div class="card-subtitulo">Definición funcional</div>
@@ -359,7 +373,7 @@ tr:hover{
         </div>
     </div>
 
-    <div class="card card-desarrollo">
+    <div class="card card-desarrollo" id="card-desarrollo">
         <div class="card-titulo">En desarrollo</div>
         <div class="numero" id="desarrollo">0</div>
         <div class="card-subtitulo">Desarrollo activo</div>
@@ -368,7 +382,7 @@ tr:hover{
         </div>
     </div>
 
-    <div class="card card-pruebas">
+    <div class="card card-pruebas" id="card-pruebas">
         <div class="card-titulo">En pruebas</div>
         <div class="numero" id="pruebas">0</div>
         <div class="card-subtitulo">Validación funcional</div>
@@ -377,7 +391,7 @@ tr:hover{
         </div>
     </div>
 
-    <div class="card card-sprint">
+    <div class="card card-sprint" id="card-sprint">
         <div class="card-titulo">Listo para sprint</div>
         <div class="numero" id="sprint">0</div>
         <div class="card-subtitulo">Pendiente de planificación</div>
@@ -386,7 +400,7 @@ tr:hover{
         </div>
     </div>
 
-    <div class="card card-cancelado">
+    <div class="card card-cancelado" id="card-cancelado">
         <div class="card-titulo">Cancelado</div>
         <div class="numero" id="cancelado">0</div>
         <div class="card-subtitulo">Iniciativas canceladas</div>
@@ -427,6 +441,7 @@ tr:hover{
 <script>
 
 let datos = [];
+let filtroEstatus = "";
 
 function cargarDatos(data){
 
@@ -619,6 +634,62 @@ document
     );
 });
     
+</script>
+
+<script>
+
+function activarTarjeta(id){
+    document
+    .querySelectorAll(".card")
+    .forEach(card => {
+        card.classList.remove("card-activa");
+    });
+    document
+    .getElementById(id)
+    .classList.add("card-activa");
+}
+document.getElementById("card-total")
+.addEventListener("click",()=>{
+    filtroEstatus = "";
+    activarTarjeta("card-total");
+    renderizar(datos);
+});
+document.getElementById("card-po")
+.addEventListener("click",()=>{
+    filtroEstatus = "Pendiente de score";
+    activarTarjeta("card-po");
+    aplicarFiltroEstatus();
+});
+document.getElementById("card-estructura")
+.addEventListener("click",()=>{
+    filtroEstatus = "En estructuración";
+    activarTarjeta("card-estructura");
+    aplicarFiltroEstatus();
+});
+document.getElementById("card-desarrollo")
+.addEventListener("click",()=>{
+    filtroEstatus = "En desarrollo";
+    activarTarjeta("card-desarrollo");
+    aplicarFiltroEstatus();
+});
+document.getElementById("card-pruebas")
+.addEventListener("click",()=>{
+    filtroEstatus = "En pruebas";
+    activarTarjeta("card-pruebas");
+    aplicarFiltroEstatus();
+});
+document.getElementById("card-sprint")
+.addEventListener("click",()=>{
+    filtroEstatus = "Listo para sprint";
+    activarTarjeta("card-sprint");
+    aplicarFiltroEstatus();
+});
+document.getElementById("card-cancelado")
+.addEventListener("click",()=>{
+    filtroEstatus = "Cancelado";
+    activarTarjeta("card-cancelado");
+    aplicarFiltroEstatus();
+});
 </script>
 
 <script>
