@@ -135,7 +135,10 @@ h1{
     line-height:1;
     color:#004481;
 }
-
+.filtros{
+    margin-top:5px;
+    margin-bottom:10px;
+}
 input{
     width:100%;
     padding:10px;
@@ -143,7 +146,22 @@ input{
     border:1px solid #ccc;
     border-radius:6px;
 }
-
+#filtroNegocio{
+    display:block;
+    width:320px;
+    padding:10px 12px;
+    margin-bottom:12px;
+    border:1px solid #d0d5dd;
+    border-radius:8px;
+    background:white;
+    font-size:14px;
+}
+#buscar{
+    display:block;
+    width:100%;
+    margin-top:0;
+    margin-bottom:15px;
+}
 table{
     width:100%;
     border-collapse:collapse;
@@ -272,11 +290,13 @@ tr:hover{
 
 </div>
 
-<select id="filtroNegocio">
-   <option value="">
-      Todas las líneas de negocio
-   </option>
-</select>
+<div class="filtros">
+    <select id="filtroNegocio">
+        <option value="">
+            Todas las líneas de negocio
+        </option>
+    </select>
+</div>
 
 <input id="buscar" placeholder="Buscar...">
 
@@ -357,7 +377,7 @@ function renderizar(lista){
         sprint;
 }
 
-document.getElementById("buscar")
+document.getElementById("input")
 .addEventListener("input",function(){
 
     const texto =
