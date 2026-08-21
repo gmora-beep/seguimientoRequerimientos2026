@@ -325,9 +325,26 @@ function cargarDatos(data){
 
     datos = data;
 
+    cargarLineasNegocio();
+
     renderizar(data);
 }
-
+function cargarLineasNegocio(){
+    const combo =
+        document.getElementById("filtroNegocio");
+    const lineas =
+        [...new Set(datos.map(x => x.negocio))];
+    combo.innerHTML =
+        '<option value="">Todas las líneas de negocio</option>';
+    lineas.forEach(linea => {
+        if(!linea) return;
+        combo.innerHTML += `
+            <option value="${linea}">
+                ${linea}
+            </option>
+        `;
+    });
+}
 function renderizar(lista){
 
     let desarrollo = 0;
@@ -392,7 +409,25 @@ document.getElementById("input")
 
     renderizar(filtrados);
 });
+document
+.getElementById("filtroNegocio")
+.addEventListener("change", function(){
 
+    const lineaSeleccionada = this.value;
+
+    if(lineaSeleccionada === ""){
+
+        renderizar(datos);
+        return;
+    }
+
+    const filtrados =
+        datos.filter(item =>
+            item.negocio === lineaSeleccionada
+        );
+
+    renderizar(filtrados);
+});
 </script>
 
 <script>
@@ -400,8 +435,6 @@ var s = document.createElement('script');
 s.src = 'https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h_7UwQqZsw7AHmXiXamQDLFNb_vxDEF-S6ekp/exec?callback=cargarDatos';
 document.body.appendChild(s);
 </script>
-
-</body>
 
 </body>
 </html>
