@@ -190,7 +190,7 @@ th:nth-child(2),
 td:nth-child(2){
     width:52%;
 }
-/* Responsable */
+/* Solicitante */
 th:nth-child(3),
 td:nth-child(3){
     width:12%;
@@ -409,7 +409,7 @@ tr:hover{
 <tr>
     <th>Tipo</th>
     <th>Requerimiento</th>
-    <th>Responsable</th>
+    <th>Solicitante</th>
     <th>Score</th>
     <th>Prioridad</th>
     <th>Estatus</th>
@@ -505,7 +505,7 @@ function renderizar(lista){
                 </strong>
             </td>        
             <td>
-                ${item.responsable || "-"}
+                ${item.Solicitante || "-"}
             </td>        
             <td>
                 ${item.score || "-"}
