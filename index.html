@@ -449,6 +449,34 @@ function cargarLineasNegocio(){
     });
 }
 function renderizar(lista){
+    const ordenPrioridad = {
+        "MUY ALTA": 1,
+        "Muy Alta": 1,
+        "ALTA": 2,
+        "Alta": 2,
+        "MEDIA": 3,
+        "Media": 3,
+        "BAJA": 4,
+        "Baja": 4,
+        "N/A": 5,
+        "-": 5,
+        "": 5
+    };
+    lista.sort((a,b)=>{
+        const prioridadA =
+            ordenPrioridad[
+                (a.prioridad || "").trim()
+            ] || 99;
+        const prioridadB =
+            ordenPrioridad[
+                (b.prioridad || "").trim()
+            ] || 99;
+        if(prioridadA !== prioridadB){
+            return prioridadA - prioridadB;
+        }
+        return Number(b.score || 0) -
+               Number(a.score || 0);
+    });
 
     let desarrollo = 0;
     let pruebas = 0;
