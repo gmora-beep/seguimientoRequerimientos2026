@@ -247,6 +247,10 @@ tbody tr:hover{
     background:#fff1e6;
     color:#ff6b00;
 }
+.badge-contingencia{
+    background:#fee2e2;
+    color:#dc2626;
+}
 .badge-estatus{
     display:inline-block;
     padding:4px 10px;
@@ -523,10 +527,14 @@ function renderizar(lista){
         tabla.innerHTML += `
         <tr>        
             <td>
-                <span class="badge-tipo">
-                    ${item.tipo || "-"}
-                </span>
-            </td>        
+    <span class="badge-tipo ${
+        item.tipo === "Req. contingencia"
+            ? "badge-contingencia"
+            : ""
+    }">
+        ${item.tipo || "-"}
+    </span>
+</td>      
             <td>
                 <strong>
                     ${item.nombre || ""}
