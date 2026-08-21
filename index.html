@@ -177,21 +177,43 @@ table{
     width:100%;
     border-collapse:collapse;
     background:white;
+    table-layout:fixed;
 }
-
+th:nth-child(1),
+td:nth-child(1){
+    width:40%;
+}
+th:nth-child(2),
+td:nth-child(2){
+    width:12%;
+}
+th:nth-child(3),
+td:nth-child(3){
+    width:13%;
+}
+th:nth-child(4),
+td:nth-child(4){
+    width:8%;
+}
+th:nth-child(5),
+td:nth-child(5){
+    width:10%;
+}
+th:nth-child(6),
+td:nth-child(6){
+    width:17%;
+}
 th{
     background:#004481;
     color:white;
     padding:6px;
     font-size:12px;
 }
-
 td{
     padding:5px 6px;
     font-size:11px;
     border-bottom:1px solid #ddd;
 }
-
 tr:hover{
     background:#f5f9ff;
 }
@@ -310,12 +332,12 @@ tr:hover{
 
 <thead>
 <tr>
-<th>ID</th>
 <th>Requerimiento</th>
+<th>Tipo</th>
 <th>Responsable</th>
+<th>Score</th>
 <th>Prioridad</th>
 <th>Estatus</th>
-<th>Equipo</th>
 </tr>
 </thead>
 
@@ -384,12 +406,12 @@ function renderizar(lista){
 
         tabla.innerHTML += `
         <tr>
-            <td>${item.id || ""}</td>
             <td>${item.nombre || ""}</td>
-            <td>${item.responsable || ""}</td>
-            <td>${item.prioridad || ""}</td>
-            <td>${item.estatus || ""}</td>
-            <td>${item.equipo || ""}</td>
+            <td>${item.tipo || "-"}</td>
+            <td>${item.responsable || "-"}</td>
+            <td>${item.score || "-"}</td>
+            <td>${item.prioridad || "-"}</td>
+            <td>${item.estatus || "-"}</td>
         </tr>`;
     });
     const revisionPO =
