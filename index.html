@@ -139,12 +139,18 @@ h1{
     transform:translateY(-2px);
 }
 .card-activa{
-    background:#dbeafe;
-    transform:translateY(-4px) scale(1.03);
+    background:#01244a !important;
+    color:white;
+    transform:translateY(-6px) scale(1.05);
     box-shadow:
-    0 0 0 4px #01244a,
-    0 10px 24px rgba(1,36,74,.25);
-    z-index:10;
+    0 0 0 4px #60a5fa,
+    0 15px 30px rgba(1,36,74,.35);
+    z-index:20;
+}
+.card-activa .card-titulo,
+.card-activa .card-subtitulo,
+.card-activa .numero{
+    color:white !important;
 }
 .card-activa .numero{
     color:#01244a;
@@ -679,7 +685,6 @@ document.getElementById("card-po")
         ].includes(estatus);
     });
     renderizar(filtrados);
-});
 });
 document.getElementById("card-estructura")
 .addEventListener("click",()=>{
