@@ -1,112 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
 
-<title>Seguimiento de Requerimientos 2026</title>
+fetch("https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h_7UwQqZsw7AHmXiXamQDLFNb_vxDEF-S6ekp/exec")
+  .then(r => r.json())
+  .then(data => {
 
-<style>
+      console.log(data);
 
-body{
-    font-family:Segoe UI, Arial;
-    background:#f5f6fa;
-    margin:0;
-    padding:20px;
-}
+      alert(
+        "Registros cargados: " +
+        data.length
+      );
 
-h1{
-    color:#004481;
-}
+  });
 
-.cards{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.card{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
-    min-width:200px;
-}
-
-.numero{
-    font-size:32px;
-    font-weight:bold;
-    color:#004481;
-}
-
-table{
-    width:100%;
-    margin-top:20px;
-    border-collapse:collapse;
-    background:white;
-}
-
-th{
-    background:#004481;
-    color:white;
-    padding:12px;
-}
-
-td{
-    padding:10px;
-    border-bottom:1px solid #ddd;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<h1>Seguimiento de Requerimientos</h1>
-
-<div class="cards">
-
-    <div class="card">
-        <div>Total</div>
-        <div class="numero">25</div>
-    </div>
-
-    <div class="card">
-        <div>En Desarrollo</div>
-        <div class="numero">5</div>
-    </div>
-
-    <div class="card">
-        <div>En Pruebas</div>
-        <div class="numero">3</div>
-    </div>
-
-</div>
-
-<table>
-
-<thead>
-<tr>
-<th>ID</th>
-<th>Requerimiento</th>
-<th>Responsable</th>
-<th>Estatus</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr>
-<td>PP1071315450</td>
-<td>Monitoreo en tiempo real</td>
-<td>Cecilia Pascual</td>
-<td>Pendiente de score</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</body>
-</html>
+</script>
