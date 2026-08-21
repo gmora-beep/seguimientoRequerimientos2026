@@ -410,22 +410,22 @@ document.getElementById("buscar")
 document
 .getElementById("filtroNegocio")
 .addEventListener("change", function(){
-    const lineaSeleccionada =
-        this.value.trim();
-    if(lineaSeleccionada === ""){
-        renderizar(datos);
-        return;
-    }
-    const filtrados =
-        datos.filter(item =>
-            (item.negocio || "")
-            .trim()
-            .toLowerCase()
-            ===
-            lineaSeleccionada
-            .toLowerCase()
-        );
-    renderizar(filtrados);
+
+    const lineaSeleccionada = this.value;
+
+    console.log("Seleccionado:", lineaSeleccionada);
+
+    const filtrados = datos.filter(item =>
+        item.negocio === lineaSeleccionada
+    );
+
+    console.log("Filtrados:", filtrados);
+
+    renderizar(
+        lineaSeleccionada === ""
+            ? datos
+            : filtrados
+    );
 });
     
 </script>
