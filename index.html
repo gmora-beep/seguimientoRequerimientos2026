@@ -1,35 +1,14 @@
-function doGet() {
-
-  const sheet =
-    SpreadsheetApp
-      .openById("1M8JNItYytS4Z7tbE43CfjPIzr_QnhgMBxA1Vi8jDCJU")
-      .getSheetByName("Hoja1");
-
-  const data =
-    sheet.getDataRange().getValues();
-
-  const headers = data.shift();
-
-  const result = data.map(row => ({
-      id: row[0],
-      fecha: row[1],
-      nombre: row[2],
-      score: row[4],
-      prioridad: row[5],
-      responsable: row[6],
-      tipo: row[7],
-      negocio: row[8],
-      equipo: row[9],
-      estatus: row[10],
-      avance: row[11],
-      comentarios: row[12]
-  }));
-
-  return ContentService
-      .createTextOutput(
-          JSON.stringify(result)
-      )
-      .setMimeType(
-          ContentService.MimeType.JSON
+<script>
+fetch("https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h_7UwQqZsw7AHmXiXamQDLFNb_vxDEF-S6ekp/exec")
+  .then(r => r.json())
+  .then(data => {
+      console.log("DATOS:", data);
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        "<h2>Registros: " + data.length + "</h2>"
       );
-}
+  })
+  .catch(error => {
+      console.error("ERROR:", error);
+  });
+</script>
