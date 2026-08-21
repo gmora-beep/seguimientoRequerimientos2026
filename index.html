@@ -11,12 +11,13 @@
 body{
     margin:0;
     padding:20px;
-    font-family:Segoe UI, Arial, sans-serif;
+    font-family:'Segoe UI', Arial, sans-serif;
     background:#f4f6f9;
 }
 
 h1{
     color:#004481;
+    margin-bottom:20px;
 }
 
 .cards{
@@ -34,29 +35,40 @@ h1{
     box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
+.card h3{
+    margin:0;
+    font-size:16px;
+    font-weight:500;
+}
+
 .numero{
     font-size:34px;
     font-weight:bold;
     color:#004481;
+    margin-top:10px;
 }
 
 input{
     width:100%;
-    box-sizing:border-box;
     padding:12px;
+    box-sizing:border-box;
     margin-bottom:20px;
+    border:1px solid #ccc;
+    border-radius:6px;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
     background:white;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
 th{
     background:#004481;
     color:white;
     padding:12px;
+    text-align:left;
 }
 
 td{
@@ -69,8 +81,8 @@ tr:hover{
 }
 
 </style>
-</head>
 
+</head>
 <body>
 
 <h1>Seguimiento de Requerimientos</h1>
@@ -78,22 +90,22 @@ tr:hover{
 <div class="cards">
 
     <div class="card">
-        <div>Total</div>
+        <h3>Total</h3>
         <div id="total" class="numero">0</div>
     </div>
 
     <div class="card">
-        <div>En Desarrollo</div>
+        <h3>En Desarrollo</h3>
         <div id="desarrollo" class="numero">0</div>
     </div>
 
     <div class="card">
-        <div>En Pruebas</div>
+        <h3>En Pruebas</h3>
         <div id="pruebas" class="numero">0</div>
     </div>
 
     <div class="card">
-        <div>Listo para Sprint</div>
+        <h3>Listo para Sprint</h3>
         <div id="sprint" class="numero">0</div>
     </div>
 
@@ -101,6 +113,7 @@ tr:hover{
 
 <input
 id="buscar"
+type="text"
 placeholder="Buscar requerimiento, responsable o equipo..."
 >
 
@@ -117,7 +130,8 @@ placeholder="Buscar requerimiento, responsable o equipo..."
 </tr>
 </thead>
 
-<tbody id="tabla"></tbody>
+<tbody id="tabla">
+</tbody>
 
 </table>
 
@@ -127,16 +141,16 @@ let datos = [];
 
 function cargarDatos(data){
 
+    console.log("Datos recibidos:", data);
+
     datos = data;
 
-    renderizar(data);
-
+    renderizar(datos);
 }
 
 function renderizar(lista){
 
-    const tabla =
-        document.getElementById("tabla");
+    const tabla = document.getElementById("tabla");
 
     tabla.innerHTML = "";
 
@@ -144,16 +158,21 @@ function renderizar(lista){
     let pruebas = 0;
     let sprint = 0;
 
-    lista.forEach(item=>{
+    lista.forEach(item => {
 
-        if(item.estatus === "En desarrollo")
+        const estatus = (item.estatus || "").trim();
+
+        if(estatus === "En desarrollo"){
             desarrollo++;
+        }
 
-        if(item.estatus === "En pruebas")
+        if(estatus === "En pruebas"){
             pruebas++;
+        }
 
-        if(item.estatus === "Listo para sprint")
+        if(estatus === "Listo para sprint"){
             sprint++;
+        }
 
         tabla.innerHTML += `
         <tr>
@@ -167,38 +186,29 @@ function renderizar(lista){
         `;
     });
 
-    document.getElementById("total").innerText =
-        lista.length;
-
-    document.getElementById("desarrollo").innerText =
-        desarrollo;
-
-    document.getElementById("pruebas").innerText =
-        pruebas;
-
-    document.getElementById("sprint").innerText =
-        sprint;
+    document.getElementById("total").innerText = lista.length;
+    document.getElementById("desarrollo").innerText = desarrollo;
+    document.getElementById("pruebas").innerText = pruebas;
+    document.getElementById("sprint").innerText = sprint;
 }
 
-document
-.getElementById("buscar")
-.addEventListener("input",function(){
+document.getElementById("buscar").addEventListener("input", function(){
 
-    const texto =
-        this.value.toLowerCase();
+    const texto = this.value.toLowerCase();
 
-    const filtrados =
-        datos.filter(x =>
-            JSON.stringify(x)
-            .toLowerCase()
-            .includes(texto)
-        );
+    const filtrados = datos.filter(item =>
+        JSON.stringify(item)
+        .toLowerCase()
+        .includes(texto)
+    );
 
     renderizar(filtrados);
+
 });
 
-<script 
-src="https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h_7UwQqZsw7AHmXiXamQDLFNb_vxDEF-S6ekp/=cargarDatosscript>
+</script>
+
+https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h_7UwQqZsw7AHmXiXamQDLFNb_vxDEF-S6ekp/exec?callback=cargarDatosscript>
 
 </body>
 </html>
