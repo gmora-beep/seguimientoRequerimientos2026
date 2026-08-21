@@ -2,21 +2,201 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Prueba</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Seguimiento de Requerimientos</title>
+
+<style>
+
+body{
+    font-family:Segoe UI,Arial,sans-serif;
+    background:#f4f6f9;
+    margin:20px;
+}
+
+h1{
+    color:#004481;
+}
+
+.cards{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    min-width:200px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.numero{
+    font-size:36px;
+    font-weight:bold;
+    color:#004481;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-bottom:20px;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th{
+    background:#004481;
+    color:white;
+    padding:10px;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f5f9ff;
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>Prueba de conexión</h1>
+<h1>Seguimiento de Requerimientos</h1>
 
-<div id="resultado">
-Esperando datos...
+<div class="cards">
+
+    <div class="card">
+        <div>Total</div>
+        <div class="numero" id="total">0</div>
+    </div>
+
+    <div class="card">
+        <div>En Desarrollo</div>
+        <div class="numero" id="desarrollo">0</div>
+    </div>
+
+    <div class="card">
+        <div>En Pruebas</div>
+        <div class="numero" id="pruebas">0</div>
+    </div>
+
+    <div class="card">
+        <div>Listo para Sprint</div>
+        <div class="numero" id="sprint">0</div>
+    </div>
+
 </div>
 
+<input id="buscar" placeholder="Buscar...">
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Requerimiento</th>
+<th>Responsable</th>
+<th>Prioridad</th>
+<th>Estatus</th>
+<th>Equipo</th>
+</tr>
+</thead>
+
+<tbody id="tabla"></tbody>
+
+</table>
+
 <script>
+
+let datos = [];
+
 function cargarDatos(data){
-    document.getElementById("resultado").innerHTML =
-        "Registros encontrados: " + data.length;
+
+    datos = data;
+
+    renderizar(data);
 }
+
+function renderizar(lista){
+
+    let desarrollo = 0;
+    let pruebas = 0;
+    let sprint = 0;
+
+    const tabla =
+        document.getElementById("tabla");
+
+    tabla.innerHTML = "";
+
+    lista.forEach(item => {
+
+        const estatus =
+            (item.estatus || "").trim();
+
+        if(estatus === "En desarrollo")
+            desarrollo++;
+
+        if(estatus === "En pruebas")
+            pruebas++;
+
+        if(estatus === "Listo para sprint")
+            sprint++;
+
+        tabla.innerHTML += `
+        <tr>
+            <td>${item.id || ""}</td>
+            <td>${item.nombre || ""}</td>
+            <td>${item.responsable || ""}</td>
+            <td>${item.prioridad || ""}</td>
+            <td>${item.estatus || ""}</td>
+            <td>${item.equipo || ""}</td>
+        </tr>`;
+    });
+
+    document.getElementById("total").innerText =
+        lista.length;
+
+    document.getElementById("desarrollo").innerText =
+        desarrollo;
+
+    document.getElementById("pruebas").innerText =
+        pruebas;
+
+    document.getElementById("sprint").innerText =
+        sprint;
+}
+
+document.getElementById("buscar")
+.addEventListener("input",function(){
+
+    const texto =
+        this.value.toLowerCase();
+
+    const filtrados =
+        datos.filter(item =>
+            JSON.stringify(item)
+            .toLowerCase()
+            .includes(texto)
+        );
+
+    renderizar(filtrados);
+});
+
 </script>
 
-<script src="https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h_7UwQqZsw7AHmXiXamQDLFNb_vxDEF-S6ekp/exec?callback=cargarDatos"></script>
+https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h_7UwQqZsw7AHmXiXamQDLFNb_vxDEF-S6ekp/exec?callback=cargarDatosscript>
+
+</body>
+</html>
