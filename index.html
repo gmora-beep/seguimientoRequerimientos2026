@@ -175,9 +175,8 @@ input{
 }
 .link-ficha{
     color:#004481;
-    font-weight:600;
     text-decoration:none;
-    white-space:nowrap;
+    font-weight:600;
 }
 .link-ficha:hover{
     text-decoration:underline;
@@ -663,12 +662,10 @@ lista.forEach(item => {
         ${item.scorePdf || "-"}
     </td>
     <td>
-        ${
-            item.fichaTrabajo
-                ? `<a href="${item.fichaTrabajo}"
-                     target="_blank"
-                        : "-"
-        }
+        <a
+            href="${item.fichaTrabajo || '#'}"
+            target� Ver ficha' : '-'}
+        </a>
     </td>
 </tr>
 `;
