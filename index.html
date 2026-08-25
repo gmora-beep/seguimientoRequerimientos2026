@@ -177,6 +177,7 @@ input{
     color:#004481;
     font-weight:600;
     text-decoration:none;
+    white-space:nowrap;
 }
 .link-ficha:hover{
     text-decoration:underline;
@@ -662,7 +663,16 @@ lista.forEach(item => {
         ${item.scorePdf || "-"}
     </td>
     <td>
-        ${item.fichaTrabajo || "-"}
+        ${
+            item.fichaTrabajo
+                ? `
+                    <a
+                    }
+                        📄 Ver ficha
+                    </a>
+                  `
+                : "-"
+        }
     </td>
 </tr>
 `;
