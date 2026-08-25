@@ -433,8 +433,11 @@ tr:hover{
     <th>Requerimiento</th>
     <th>Solicitante</th>
     <th>Score</th>
+    <th>Score PDF</th>
+    <th>Avance</th>
     <th>Prioridad</th>
     <th>Estatus</th>
+    <th>Ficha</th>
 </tr>
 </thead>
 
@@ -568,37 +571,48 @@ lista.forEach(item => {
     if(item.estatus === "Cancelado")
         estatusClase = "estatus-cancelado";
     tabla.innerHTML += `
-});    
-        <tr>
-            <td>
-                <span class="badge-tipo ${
-                    item.tipo === "Req. contingencia"
-                        ? "badge-contingencia"
-                        : ""
-                }">
-                    ${item.tipo || "-"}
-                </span>
-            </td>
-            <td>
-                <strong>${item.nombre || ""}</strong>
-            </td>
-            <td>
-                ${item.responsable || "-"}
-            </td>
-            <td>
-                ${item.score || "-"}
-            </td>
-            <td>
-                ${item.prioridad || "-"}
-            </td>
-            <td>
-                <span class="badge-estatus ${estatusClase}">
-                    ${item.estatus || "-"}
-                </span>
-            </td>
-        </tr>
-    `;
-});
+    <tr>
+        <td>
+            <span class="badge-tipo ${
+                item.tipo === "Req. contingencia"
+                    ? "badge-contingencia"
+                    : ""
+            }">
+                ${item.tipo || "-"}
+            </span>
+        </td>
+        <td>
+            <strong>${item.nombre || ""}</strong>
+        </td>
+        <td>
+            ${item.responsable || "-"}
+        </td>
+        <td>
+            ${item.score || "-"}
+        </td>
+        <td>
+            ${item.scorePdf || "-"}
+        </td>
+        <td>
+            ${item.avance || "-"}
+        </td>
+        <td>
+            ${item.prioridad || "-"}
+        </td>
+        <td>
+            <span class="badge-estatus ${estatusClase}">
+                ${item.estatus || "-"}
+            </span>
+        </td>
+        <td>
+            ${
+                item.fichaTrabajo
+                ? `${item.fichaTrabajo}Ver ficha</a>`
+                : "-"
+            }
+        </td>
+    </tr>
+`;
     const revisionPO =
         datosKPI.length
         - desarrollo
