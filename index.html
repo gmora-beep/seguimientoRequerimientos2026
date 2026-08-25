@@ -664,8 +664,8 @@ lista.forEach(item => {
 </td>
 <td>
     <a
-        href="${item.#'}
-        ${item.fichaTrabajo ? "📄 Ver ficha" : "-"}
+        href="${item.fichaTrabajo || '#'}"
+        target� Ver ficha" : "-"}
     </a>
 </td>
 </tr>
