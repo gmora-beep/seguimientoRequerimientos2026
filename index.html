@@ -597,36 +597,6 @@ lista.forEach(item => {
             </td>
         </tr>
     `;
-            <td>
-    <span class="badge-tipo ${
-        item.tipo === "Req. contingencia"
-            ? "badge-contingencia"
-            : ""
-    }">
-        ${item.tipo || "-"}
-    </span>
-</td>      
-            <td>
-                <strong>
-                    ${item.nombre || ""}
-                </strong>
-            </td>        
-            <td>
-                ${item.responsable || "-"}
-            </td>        
-            <td>
-                ${item.score || "-"}
-            </td>        
-            <td>
-                ${item.prioridad || "-"}
-            </td>        
-            <td>
-                <span class="badge-estatus ${estatusClase}">
-                    ${item.estatus || "-"}
-                </span>
-            </td>        
-        </tr>`;
-    });
     const revisionPO =
         datosKPI.length
         - desarrollo
