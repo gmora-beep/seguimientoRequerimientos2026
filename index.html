@@ -663,15 +663,10 @@ lista.forEach(item => {
         ${item.scorePdf || "-"}
     </td>
 <td>
-    ${
-        item.fichaTrabajo
-            ? `<a href="${item.fichaTrabajo}"
-                 target="_blank"
-    a>`
-            : "-"
-    }
+    ${item.fichaTrabajo || '#'}
+        ${item.fichaTrabajo ? "📄 Ver ficha" : "-"}
+    </a>
 </td>
-
 </tr>
 `;
 ``
