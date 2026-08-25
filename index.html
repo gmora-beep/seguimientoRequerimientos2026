@@ -235,6 +235,15 @@ table{
     font-weight:600;
     transition:width .4s ease;
 }
+.titulo-filtro{
+    display:block;
+    margin-bottom:6px;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    color:#667085;
+    letter-spacing:.8px;
+}
 /* Tipo */
 th:nth-child(1),
 td:nth-child(1){
@@ -468,17 +477,17 @@ tr:hover{
 </div>
 
 <div class="filtros">
+    <label class="titulo-filtro">
+        Línea de negocio
+    </label>
     <select id="filtroNegocio">
         <option value="">
             Todas las líneas de negocio
         </option>
     </select>
 </div>
-
 <input id="buscar" placeholder="Buscar...">
-
 <table>
-
 <thead>
 <tr>
     <th>Tipo</th>
