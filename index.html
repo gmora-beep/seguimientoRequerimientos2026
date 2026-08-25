@@ -177,6 +177,7 @@ input{
     color:#004481;
     font-weight:600;
     text-decoration:none;
+    white-space:nowrap;
 }
 .link-ficha:hover{
     text-decoration:underline;
@@ -664,8 +665,9 @@ lista.forEach(item => {
     <td>
         ${
             item.fichaTrabajo
-                ? `<a href="${item.fichaTrabajo}"
-                      target            </a>`
+                ? `<a href="${item.fichaTrabajo}" 
+           📄 Ver ficha
+                   </a>`
                 : "-"
         }
     </td>
