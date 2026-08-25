@@ -473,15 +473,16 @@ function cargarLineasNegocio(){
     });
 }
 function aplicarFiltros(){
-    let resultado = [...datos];
+    let datosKPI = [...datos];
     if(filtroNegocio !== ""){
-        resultado = resultado.filter(item =>
+        datosKPI = datosKPI.filter(item =>
             item.negocio === filtroNegocio
         );
     }
+    let datosTabla = [...datosKPI];
     if(filtroEstatus !== ""){
         if(filtroEstatus === "REVISION_PO"){
-            resultado = resultado.filter(item => {
+            datosTabla = datosTabla.filter(item => {
                 const estatus =
                     (item.estatus || "").trim();
                 return ![
@@ -493,16 +494,15 @@ function aplicarFiltros(){
                 ].includes(estatus);
             });
         }else{
-            resultado = resultado.filter(item =>
+            datosTabla = datosTabla.filter(item =>
                 (item.estatus || "").trim()
-                ===
-                filtroEstatus
+                === filtroEstatus
             );
         }
     }
-    renderizar(resultado);
+    renderizar(datosTabla, datosKPI);
 }
-function renderizar(lista){
+function renderizar(lista, datosKPI = lista){
     const ordenPrioridad = {
         "MUY ALTA": 1,
         "Muy Alta": 1,
@@ -543,7 +543,7 @@ function renderizar(lista){
 
     tabla.innerHTML = "";
 
-    lista.forEach(item => {
+    datosKPI.forEach(item => {
 
         const estatus =
             (item.estatus || "").trim();
@@ -615,7 +615,7 @@ function renderizar(lista){
         - cancelado;
     
     document.getElementById("total").innerText =
-        lista.length;
+    datosKPI.length;
 
     document.getElementById("desarrollo").innerText =
         desarrollo;
@@ -669,6 +669,24 @@ function activarTarjeta(id){
     .getElementById(id)
     .classList.add("card-activa");
 }
+function limpiarFiltroEstatus(){
+    filtroEstatus = "";
+    document
+    .querySelectorAll(".card")
+    .forEach(card => {
+        card.classList.remove("card-activa");
+    });
+    aplicarFiltros();
+}
+document.addEventListener("click", function(e){
+    if(
+        !e.target.closest(".card")
+        &&
+        !e.target.closest("#filtroNegocio")
+    ){
+        limpiarFiltroEstatus();
+    }
+});
 document.getElementById("card-total")
 .addEventListener("click",()=>{
     filtroEstatus = "";
