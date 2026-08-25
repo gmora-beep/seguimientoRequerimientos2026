@@ -19,9 +19,10 @@ body{
 .header{
     background:linear-gradient(
         90deg,
-        #01244a 0%,
-        #0a3f63 40%,
-        #11566b 100%
+        #cfe1ff 0%,
+        #7aa7ff 35%,
+        #2f6ce5 70%,
+        #01244a 100%
     );
     color:white;
     padding:16px 28px;
@@ -206,6 +207,31 @@ table{
     background:white;
     table-layout:auto;
 }
+.barra-avance{
+    width:100%;
+    height:22px;
+    background:#e5e7eb;
+    border-radius:999px;
+    overflow:hidden;
+    position:relative;
+}
+.barra-avance-fill{
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #9fc3ff 0%,
+        #4f8dfd 50%,
+        #01244a 100%
+    );
+    border-radius:999px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:11px;
+    font-weight:600;
+    transition:width .4s ease;
+}
 /* Tipo */
 th:nth-child(1),
 td:nth-child(1){
@@ -214,7 +240,7 @@ td:nth-child(1){
 /* Requerimiento */
 th:nth-child(2),
 td:nth-child(2){
-    width:32%;
+    width:34%;
 }
 /* Solicitante */
 th:nth-child(3),
@@ -226,29 +252,29 @@ th:nth-child(4),
 td:nth-child(4){
     width:6%;
 }
-/* Score PDF */
+/* Prioridad */
 th:nth-child(5),
 td:nth-child(5){
     width:8%;
 }
-/* Avance */
+/* Estatus */
 th:nth-child(6),
 td:nth-child(6){
-    width:6%;
+    width:12%;
 }
-/* Prioridad */
+/* Avance */
 th:nth-child(7),
 td:nth-child(7){
-    width:8%;
+    width:6%;
 }
-/* Estatus */
+/* Score PDF */
 th:nth-child(8),
 td:nth-child(8){
-    width:12%;
+    width:6%;
 }
 /* Ficha */
 th:nth-child(9),
-td:nth-child(9){
+td:nth-c*ild(9){
     width:6%;
 }
 td:nth-child(2){
@@ -594,46 +620,51 @@ lista.forEach(item => {
     if(item.estatus === "Cancelado")
         estatusClase = "estatus-cancelado";
     tabla.innerHTML += `
-    <tr>
-        <td>
-            <span class="badge-tipo ${
-                item.tipo === "Req. contingencia"
-                    ? "badge-contingencia"
-                    : ""
-            }">
-                ${item.tipo || "-"}
-            </span>
-        </td>
-        <td>
-            <strong>${item.nombre || ""}</strong>
-        </td>
-        <td>
-            ${item.responsable || "-"}
-        </td>
-        <td>
-            ${item.score || "-"}
-        </td>
-        <td>
-            ${item.scorePdf || "-"}
-        </td>
-        <td>
-            ${item.avance || "-"}
-        </td>
-        <td>
-            ${item.prioridad || "-"}
-        </td>
-        <td>
-    <span class="badge-estatus ${estatusClase}">
-        ${item.estatus || "-"}
-    </span>
-</td>
-<td>
-    ${
-        item.fichaTrabajo
-            ? `<a href="${item.fichaTrabajo}" target="_blank" class              </a>`
-            : "-"
-    }
-</td>
+<tr>
+    <td>
+        <span class="badge-tipo ${
+            item.tipo === "Req. contingencia"
+                ? "badge-contingencia"
+                : ""
+        }">
+            ${item.tipo || "-"}
+        </span>
+    </td>
+    <td>
+        <strong>${item.nombre || ""}</strong>
+    </td>
+    <td>
+        ${item.responsable || "-"}
+    </td>
+    <td>
+        ${item.score || "-"}
+    </td>
+    <td>
+        ${item.prioridad || "-"}
+    </td>
+    <td>
+        <span class="badge-estatus ${estatusClase}">
+            ${item.estatus || "-"}
+        </span>
+    </td>
+    <td>
+        <div class="barra-avance">
+            <div
+                class="barra-avance-fill"
+                style="width:${Number(item.avance || 0) * 100}%"
+            >
+                ${Math.round(
+                    Number(item.avance || 0) * 100
+                )}%
+            </div>
+        </div>
+    </td>
+    <td>
+        ${item.scorePdf || "-"}
+    </td>
+    <td>
+        ${item.fichaTrabajo || "-"}
+    </td>
 </tr>
 `;
 });
