@@ -555,7 +555,7 @@ function renderizar(lista, datosKPI = lista){
     if(estatus === "Cancelado")
         cancelado++;
 });
-    lista.forEach(item => {
+lista.forEach(item => {
     let estatusClase = "estatus-po";
     if(item.estatus === "En desarrollo")
         estatusClase = "estatus-desarrollo";
@@ -567,9 +567,38 @@ function renderizar(lista, datosKPI = lista){
         estatusClase = "estatus-estructuracion";
     if(item.estatus === "Cancelado")
         estatusClase = "estatus-cancelado";
-    tabla.innerHTML += `...`;
+    tabla.innerHTML += `
+        <tr>
+            <td>
+                <span class="badge-tipo ${
+                    item.tipo === "Req. contingencia"
+                        ? "badge-contingencia"
+                        : ""
+                }">
+                    ${item.tipo || "-"}
+                </span>
+            </td>
+            <td>
+                <strong>${item.nombre || ""}</strong>
+            </td>
+            <td>
+                ${item.responsable || "-"}
+            </td>
+            <td>
+                ${item.score || "-"}
+            </td>
+            <td>
+                ${item.prioridad || "-"}
+            </td>
+            <td>
+                <span class="badge-estatus ${estatusClase}">
+                    ${item.estatus || "-"}
+                </span>
+            </td>
+        </tr>
+    `;
 });
-        <tr>        
+``       
             <td>
     <span class="badge-tipo ${
         item.tipo === "Req. contingencia"
