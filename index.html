@@ -605,12 +605,12 @@ lista.forEach(item => {
             </span>
         </td>
         <td>
-            ${
-                item.fichaTrabajo
-                ? `${item.fichaTrabajo}Ver ficha</a>`
-                : "-"
-            }
-        </td>
+        ${
+            item.fichaTrabajo
+                ? '' + item.fichaTrabajo + 'Ver ficha</a>'
+                : '-'
+        }
+    </td>
     </tr>
 `;
     const revisionPO =
