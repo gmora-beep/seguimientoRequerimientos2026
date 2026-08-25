@@ -598,6 +598,7 @@ lista.forEach(item => {
             </td>
         </tr>
     `;
+});
     const revisionPO =
         datosKPI.length
         - desarrollo
@@ -608,13 +609,10 @@ lista.forEach(item => {
     
     document.getElementById("total").innerText =
     datosKPI.length;
-
     document.getElementById("desarrollo").innerText =
         desarrollo;
-
     document.getElementById("pruebas").innerText =
         pruebas;
-
     document.getElementById("sprint").innerText =
         sprint;
     document.getElementById("revisionpo").innerText =
@@ -624,20 +622,16 @@ lista.forEach(item => {
     document.getElementById("cancelado").innerText =
         cancelado;
 }
-
 document.getElementById("buscar")
 .addEventListener("input",function(){
-
     const texto =
         this.value.toLowerCase();
-
     const filtrados =
         datos.filter(item =>
             JSON.stringify(item)
             .toLowerCase()
             .includes(texto)
         );
-
     renderizar(filtrados);
 });
 document
