@@ -173,6 +173,14 @@ input{
     border:1px solid #ccc;
     border-radius:6px;
 }
+.link-ficha{
+    color:#004481;
+    font-weight:600;
+    text-decoration:none;
+}
+.link-ficha:hover{
+    text-decoration:underline;
+}
 #filtroNegocio{
     display:block;
     width:320px;
@@ -622,8 +630,7 @@ lista.forEach(item => {
 <td>
     ${
         item.fichaTrabajo
-            ? `<a href="${item.fichaTrabajo          📄 Ver ficha
-               </a>`
+            ? `<a href="${item.fichaTrabajo}" target="_blank" class              </a>`
             : "-"
     }
 </td>
