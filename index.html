@@ -666,12 +666,15 @@ lista.forEach(item => {
     ${
         item.fichaTrabajo
             ? `<a href="${item.fichaTrabajo}"
-                  target="_blank"
-                  class="
+                 target="_blank"
+    a>`
+            : "-"
     }
 </td>
+
 </tr>
 `;
+``
 });
     const revisionPO =
         datosKPI.length
