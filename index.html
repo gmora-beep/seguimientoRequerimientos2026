@@ -175,8 +175,9 @@ input{
 }
 .link-ficha{
     color:#004481;
-    text-decoration:none;
     font-weight:600;
+    text-decoration:none;
+    white-space:nowrap;
 }
 .link-ficha:hover{
     text-decoration:underline;
@@ -661,9 +662,14 @@ lista.forEach(item => {
     <td>
         ${item.scorePdf || "-"}
     </td>
-    <td>
-        ${item.fichaTrabajo}
-    </td>
+<td>
+    ${
+        item.fichaTrabajo
+            ? `<a href="${item.fichaTrabajo}"
+                  target="_blank"
+                  class="
+    }
+</td>
 </tr>
 `;
 });
