@@ -600,22 +600,14 @@ lista.forEach(item => {
             ${item.prioridad || "-"}
         </td>
         <td>
-            <span class="badge-estatus ${estatusClase}">
-                ${item.estatus || "-"}
-            </span>
-        </td>
-        <td>
-        ${
-        <td>
-    ${
-        item.fichaTrabajo
-            ? `${item.fichaTrabajo}
-                    Ver ficha
-               </a>`
-            : "-"
-    }
+    <span class="badge-estatus ${estatusClase}">
+        ${item.estatus || "-"}
+    </span>
 </td>
-    </tr>
+<td>
+    ${item.fichaTrabajo || "-"}
+</td>
+</tr>
 `;
     const revisionPO =
         datosKPI.length
