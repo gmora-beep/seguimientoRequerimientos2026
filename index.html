@@ -173,13 +173,14 @@ input{
     border:1px solid #ccc;
     border-radius:6px;
 }
-.link-ficha{
+.btn-ficha{
+    border:none;
+    background:none;
     color:#004481;
     font-weight:600;
-    text-decoration:none;
-    white-space:nowrap;
+    cursor:pointer;
 }
-.link-ficha:hover{
+.btn-ficha:hover{
     text-decoration:underline;
 }
 #filtroNegocio{
@@ -663,10 +664,15 @@ lista.forEach(item => {
     ${item.scorePdf || "-"}
 </td>
 <td>
-    <a
-        href="${item.fichaTrabajo || '#'}"
-        target� Ver ficha" : "-"}
-    </a>
+    ${
+        item.fichaTrabajo
+            ? `<button
+                    class="btn-ficha"
+                    onclick="window.open('${item.fichaTrabajo}','_blank')">
+                    📄 Ver ficha
+               </button>`
+            : "-"
+    }
 </td>
 </tr>
 `;
