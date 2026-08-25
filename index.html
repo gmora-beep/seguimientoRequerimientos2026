@@ -540,41 +540,35 @@ function renderizar(lista, datosKPI = lista){
 
     const tabla =
         document.getElementById("tabla");
-
     tabla.innerHTML = "";
-
     datosKPI.forEach(item => {
-
-        const estatus =
-            (item.estatus || "").trim();
-
-        if(estatus === "En desarrollo")
-            desarrollo++;
-
-        if(estatus === "En pruebas")
-            pruebas++;
-
-        if(estatus === "Listo para sprint")
-            sprint++;
-        if(estatus === "En estructuración")
-            estructuracion++;
-        if(estatus === "Cancelado")
-            cancelado++;
-
-        let estatusClase = "estatus-po";
-
-        if(item.estatus === "En desarrollo")
-            estatusClase = "estatus-desarrollo";
-        if(item.estatus === "En pruebas")
-            estatusClase = "estatus-pruebas";
-        if(item.estatus === "Listo para sprint")
-            estatusClase = "estatus-sprint";
-        if(item.estatus === "En estructuración")
-            estatusClase = "estatus-estructuracion";
-        if(item.estatus === "Cancelado")
-            estatusClase = "estatus-cancelado";
-
-        tabla.innerHTML += `
+    const estatus =
+        (item.estatus || "").trim();
+    if(estatus === "En desarrollo")
+        desarrollo++;
+    if(estatus === "En pruebas")
+        pruebas++;
+    if(estatus === "Listo para sprint")
+        sprint++;
+    if(estatus === "En estructuración")
+        estructuracion++;
+    if(estatus === "Cancelado")
+        cancelado++;
+});
+    lista.forEach(item => {
+    let estatusClase = "estatus-po";
+    if(item.estatus === "En desarrollo")
+        estatusClase = "estatus-desarrollo";
+    if(item.estatus === "En pruebas")
+        estatusClase = "estatus-pruebas";
+    if(item.estatus === "Listo para sprint")
+        estatusClase = "estatus-sprint";
+    if(item.estatus === "En estructuración")
+        estatusClase = "estatus-estructuracion";
+    if(item.estatus === "Cancelado")
+        estatusClase = "estatus-cancelado";
+    tabla.innerHTML += `...`;
+});
         <tr>        
             <td>
     <span class="badge-tipo ${
@@ -607,7 +601,7 @@ function renderizar(lista, datosKPI = lista){
         </tr>`;
     });
     const revisionPO =
-        lista.length
+        datosKPI.length
         - desarrollo
         - pruebas
         - sprint
