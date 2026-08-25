@@ -472,17 +472,35 @@ function cargarLineasNegocio(){
         `;
     });
 }
-function aplicarFiltroEstatus(){
-    if(filtroEstatus === ""){
-        renderizar(datos);
-        return;
+function aplicarFiltros(){
+    let resultado = [...datos];
+    if(filtroNegocio !== ""){
+        resultado = resultado.filter(item =>
+            item.negocio === filtroNegocio
+        );
     }
-    const filtrados = datos.filter(item =>
-        (item.estatus || "").trim()
-        ===
-        filtroEstatus
-    );
-    renderizar(filtrados);
+    if(filtroEstatus !== ""){
+        if(filtroEstatus === "REVISION_PO"){
+            resultado = resultado.filter(item => {
+                const estatus =
+                    (item.estatus || "").trim();
+                return ![
+                    "En desarrollo",
+                    "En pruebas",
+                    "Listo para sprint",
+                    "En estructuración",
+                    "Cancelado"
+                ].includes(estatus);
+            });
+        }else{
+            resultado = resultado.filter(item =>
+                (item.estatus || "").trim()
+                ===
+                filtroEstatus
+            );
+        }
+    }
+    renderizar(resultado);
 }
 function renderizar(lista){
     const ordenPrioridad = {
@@ -633,24 +651,17 @@ document.getElementById("buscar")
 document
 .getElementById("filtroNegocio")
 .addEventListener("change", function(){
-
-    const lineaSeleccionada = this.value;
-
-    console.log("Seleccionado:", lineaSeleccionada);
-
-    const filtrados = datos.filter(item =>
-        item.negocio === lineaSeleccionada
-    );
-
+    filtroNegocio = this.value;
+    aplicarFiltros();
+});
     console.log("Filtrados:", filtrados);
-
     renderizar(
         lineaSeleccionada === ""
             ? datos
             : filtrados
     );
 });
-    
+   
 </script>
 
 <script>
@@ -669,53 +680,43 @@ document.getElementById("card-total")
 .addEventListener("click",()=>{
     filtroEstatus = "";
     activarTarjeta("card-total");
-    renderizar(datos);
+    aplicarFiltros();
 });
 document.getElementById("card-po")
 .addEventListener("click",()=>{
+    filtroEstatus = "REVISION_PO";
     activarTarjeta("card-po");
-    const filtrados = datos.filter(item => {
-        const estatus =
-            (item.estatus || "").trim();
-        return ![
-            "En desarrollo",
-            "En pruebas",
-            "Listo para sprint",
-            "En estructuración",
-            "Cancelado"
-        ].includes(estatus);
-    });
-    renderizar(filtrados);
+    aplicarFiltros();
 });
 document.getElementById("card-estructura")
 .addEventListener("click",()=>{
     filtroEstatus = "En estructuración";
     activarTarjeta("card-estructura");
-    aplicarFiltroEstatus();
+    aplicarFiltros();
 });
 document.getElementById("card-desarrollo")
 .addEventListener("click",()=>{
     filtroEstatus = "En desarrollo";
     activarTarjeta("card-desarrollo");
-    aplicarFiltroEstatus();
+    aplicarFiltros();
 });
 document.getElementById("card-pruebas")
 .addEventListener("click",()=>{
     filtroEstatus = "En pruebas";
     activarTarjeta("card-pruebas");
-    aplicarFiltroEstatus();
+    aplicarFiltros();
 });
 document.getElementById("card-sprint")
 .addEventListener("click",()=>{
     filtroEstatus = "Listo para sprint";
     activarTarjeta("card-sprint");
-    aplicarFiltroEstatus();
+    aplicarFiltros();
 });
 document.getElementById("card-cancelado")
 .addEventListener("click",()=>{
     filtroEstatus = "Cancelado";
     activarTarjeta("card-cancelado");
-    aplicarFiltroEstatus();
+    aplicarFiltros();
 });
 </script>
 
