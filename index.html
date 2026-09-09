@@ -777,24 +777,48 @@ background:#f8fafc;
     </span>
 
 </div>
-        <div class="estatus-item ti">
-            <span class="estatus-label">Revisión TI</span>
-        </div>  
-        <div class="estatus-item ejecucion">
-            <span class="estatus-label">En ejecución</span>
-        </div>        
-        <div class="estatus-item preparado">
-            <span class="estatus-label">Preparado</span>
-        </div>
-        <div class="estatus-item pausa">
-            <span class="estatus-label">Pausa</span>
-        </div>        
-        <div class="estatus-item cancelado">
-            <span class="estatus-label">Cancelado</span>
-        </div>        
-        <div class="estatus-item finalizado">
-            <span class="estatus-label">Finalizado</span>
-        </div>
+       <div class="estatus-item ti"
+     onclick="seleccionarEstatus('REVISION_TI')">
+    <span class="estatus-label">
+        Revisión TI
+    </span>
+
+</div> 
+<div class="estatus-item ejecucion"
+     onclick="seleccionarEstatus('EJECUCION')">
+    <span class="estatus-label">
+        En ejecución
+    </span>
+
+</div>      
+        <div class="estatus-item preparado"
+     onclick="seleccionarEstatus('PREPARADO')">
+    <span class="estatus-label">
+        Preparado
+    </span>
+
+</div>
+        <div class="estatus-item pausa"
+     onclick="seleccionarEstatus('PAUSA')">
+    <span class="estatus-label">
+        Pausa
+    </span>
+
+</div>       
+        <div class="estatus-item cancelado"
+     onclick="seleccionarEstatus('CANCELADO')">
+    <span class="estatus-label">
+        Cancelado
+    </span>
+
+</div>     
+        <div class="estatus-item finalizado"
+     onclick="seleccionarEstatus('FINALIZADO')">
+    <span class="estatus-label">
+        Finalizado
+    </span>
+
+</div>
     </aside>
     <div class="contenido-dashboard">
         <div id="vistaActiva" class="vista-activa">
