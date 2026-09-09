@@ -457,6 +457,15 @@ tr:hover{
     cursor:pointer;
     font-weight:600;
 }
+.link-requerimiento{
+    color:#01244a;
+    font-weight:700;
+    cursor:pointer;
+    text-decoration:none;
+}
+.link-requerimiento:hover{
+    color:#0a3f63;
+}
 </style>
 </head>
 
@@ -724,15 +733,13 @@ lista.forEach((item,index) => {
         </span>
     </td>
 <td>
-    <a href="#"
-       onclickyle="
-            color:#01244a;
-            font-weight:700;
-            text-decoration:none;
-       ">
+    <span
+        class="link-requerimiento"
+        onclick="abrirFicha(item)">
         ${item.nombre || ""}
-    </a>
+    </span>
 </td>
+
     <td>
         ${item.responsable || "-"}
     </td>
