@@ -654,11 +654,18 @@ background:#f8fafc;
     flex:1;
 }
 .estatus-item{
-    display:flex;
-    align-items:center;
-    min-height:18px;
-    width:100%;
+    width:16px;
+    height:16px;
+    border-radius:50%;
     cursor:pointer;
+    position:relative;
+    transition:.2s;
+    flex-shrink:0;
+}
+
+.estatus-item:hover{
+
+    transform:scale(1.25);
 }
 .estatus-item:hover{
     transform:scale(1.25);
@@ -671,15 +678,24 @@ background:#f8fafc;
     flex-shrink:0;
 }
 .estatus-label{
-    margin-left:12px;
-    color:white;
+    position:absolute;
+    left:28px;
+    top:50%;
+    transform:translateY(-50%);
+    background:white;
+    color:#01244a;
+    padding:8px 12px;
+    border-radius:10px;
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.12);
     font-size:13px;
     font-weight:600;
     white-space:nowrap;
     opacity:0;
-    transition:opacity .15s ease;
+    pointer-events:none;
+    transition:.2s;
 }
-.barra-estatus:hover .estatus-label{
+.estatus-item:hover .estatus-label{
     opacity:1;
 }
     
