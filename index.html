@@ -627,9 +627,11 @@ background:#f8fafc;
 .barra-estatus{
     position:sticky;
     top:76px;
-    width:42px;
-    min-width:42px;
-    align-self:flex-start;
+    width:48px;
+    min-width:48px;
+    overflow:hidden;
+    transition:
+        width .25s ease;
     border-radius:0 18px 18px 0;
     background:linear-gradient(
         180deg,
@@ -639,25 +641,48 @@ background:#f8fafc;
     );
     display:flex;
     flex-direction:column;
-    align-items:center;
-    justify-content:flex-start;
+    align-items:flex-start;
     gap:14px;
-    padding:20px 0;
+    padding:20px 10px;
     min-height:calc(100vh - 76px);
+}
+.barra-estatus:hover{
+    width:220px;
+    min-width:220px;
 }
 .contenido-principal{
     flex:1;
 }
 .estatus-item{
-    width:18px;
-    height:18px;
-    border-radius:50%;
+    display:flex;
+    align-items:center;
+    min-height:18px;
+    width:100%;
     cursor:pointer;
-    transition:.2s;
 }
 .estatus-item:hover{
     transform:scale(1.25);
 }
+.estatus-item::before{
+    content:"";
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    flex-shrink:0;
+}
+.estatus-label{
+    margin-left:12px;
+    color:white;
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+    opacity:0;
+    transition:opacity .15s ease;
+}
+.barra-estatus:hover .estatus-label{
+    opacity:1;
+}
+    
 .po{
     background:#f59e0b;
 }
@@ -713,13 +738,27 @@ background:#f8fafc;
 </div>
 <div class="layout-principal">
     <aside class="barra-estatus">
-        <div class="estatus-item po"></div>
-        <div class="estatus-item ti"></div>
-        <div class="estatus-item ejecucion"></div>
-        <div class="estatus-item preparado"></div>
-        <div class="estatus-item pausa"></div>
-        <div class="estatus-item cancelado"></div>
-        <div class="estatus-item finalizado"></div>
+        <div class="estatus-item po">
+    <span class="estatus-label">Revisión PO</span>
+        </div>
+        <div class="estatus-item ti">
+            <span class="estatus-label">Revisión TI</span>
+        </div>  
+        <div class="estatus-item ejecucion">
+            <span class="estatus-label">En ejecución</span>
+        </div>        
+        <div class="estatus-item preparado">
+            <span class="estatus-label">Preparado</span>
+        </div>
+        <div class="estatus-item pausa">
+            <span class="estatus-label">Pausa</span>
+        </div>        
+        <div class="estatus-item cancelado">
+            <span class="estatus-label">Cancelado</span>
+        </div>        
+        <div class="estatus-item finalizado">
+            <span class="estatus-label">Finalizado</span>
+        </div>
     </aside>
     <div class="contenido-dashboard">
         <div id="vistaActiva" class="vista-activa">
