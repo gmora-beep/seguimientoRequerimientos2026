@@ -375,7 +375,88 @@ td{
 tr:hover{
     background:#f5f9ff;
 }
-
+.modal-ficha{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:9999;
+    padding:20px;
+    overflow:auto;
+}
+.modal-ficha-contenido{
+    width:900px;
+    max-width:95%;
+    margin:auto;
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+.modal-header{
+    background:linear-gradient(
+        90deg,
+        #01244a 0%,
+        #0a3f63 40%,
+        #11566b 100%
+    );
+    color:white;
+    padding:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+.modal-header h2{
+    margin:0;
+    font-size:38px;
+}
+.btn-cerrar{
+    border:none;
+    background:none;
+    color:white;
+    cursor:pointer;
+    font-size:28px;
+}
+.modal-seccion{
+    padding:25px;
+    border-bottom:1px solid #edf0f2;
+}
+.modal-seccion h3{
+    margin-top:0;
+    color:#01244a;
+}
+.ficha-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+.ficha-item label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    color:#667085;
+    margin-bottom:5px;
+}
+.ficha-item div{
+    font-size:22px;
+    color:#01244a;
+}
+.ficha-comentarios{
+    margin-top:10px;
+    background:#f8fafc;
+    border-radius:12px;
+    padding:15px;
+    line-height:1.5;
+}
+.boton-doc{
+    border:1px solid #0a3f63;
+    background:white;
+    color:#0a3f63;
+    border-radius:10px;
+    padding:10px 16px;
+    cursor:pointer;
+    font-weight:600;
+}
 </style>
 </head>
 
@@ -643,8 +724,15 @@ lista.forEach(item => {
         </span>
     </td>
     <td>
-        <strong>${item.nombre || ""}</strong>
-    </td>
+    #})'
+       style="
+            color:#01244a;
+            font-weight:700;
+            text-decoration:none;
+       ">
+        ${item.nombre || ""}
+    </a>
+</td>
     <td>
         ${item.responsable || "-"}
     </td>
@@ -762,6 +850,110 @@ function limpiarFiltroEstatus(){
     });
     aplicarFiltros();
 }
+function cerrarFicha(){
+    document.getElementById(
+        "modalFicha"
+    ).style.display = "none";
+}
+function abrirFicha(item){
+    document.getElementById(
+        "modalFicha"
+    ).style.display = "block";
+    document.getElementById(
+        "modalTitulo"
+    ).innerText =
+        item.nombre || "";
+    document.getElementById(
+        "modalChips"
+    ).innerHTML = `
+        <span class="badge-tipo">
+            ${item.tipo || "-"}
+        </span>
+        <span class="badge-estatus">
+            ${item.prioridad || "-"}
+        </span>
+        <span class="badge-estatus">
+            ${item.estatus || "-"}
+        </span>
+        <span class="badge-estatus">
+            ${item.sprint || "-"}
+        </span>
+    `;
+    document.getElementById(
+        "contenidoFicha"
+    ).innerHTML = `
+     <div class="modal-seccion">
+        <h3>1. Información de negocio</h3>
+        <div class="ficha-grid">
+            <div class="ficha-item">
+                <label>Responsable de negocio</label>
+                <div>${item.responsable || "-"}</div>
+            </div>
+            <div class="ficha-item">
+                <label>Score</label>
+                <div>${item.score || "-"}</div>
+            </div>
+            <div class="ficha-item">
+                <label>Fecha registro de iniciativa</label>
+                <div>${item.fecha || "-"}</div>
+            </div>
+            <div class="ficha-item">
+                <label>HU</label>
+                <div>${item.hu || "-"}</div>
+            </div>
+        </div>
+        <div class="ficha-comentarios">
+            ${item.comentarios || "-"}
+        </div>
+    </div>
+    <div class="modal-seccion">
+        <h3>2. Información de desarrollo</h3>
+        <div class="ficha-grid">
+            <div class="ficha-item">
+                <label>Equipo de desarrollo</label>
+                <div>${item.equipo || "-"}</div>
+            </div>
+            <div class="ficha-item">
+                <label>Fecha de inicio de desarrollo</label>
+                <div>${item.fechaDesarrollo || "-"}</div>
+            </div>
+            <div class="ficha-item">
+                <label>Fecha de liberación</label>
+                <div>${item.fechaLiberacion || "-"}</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-seccion">
+        <h3>3. Documentación</h3>
+        <div class="ficha-grid">
+            <div>
+                <label>Score PDF</label><br>
+                ${
+                    item.scorePdf
+                    ? `<button
+                        class="boton-doc"
+                        onclick="window.open('${item.scorePdf}','_blank')">
+                        📊 Abrir Score
+                    </button>`
+                    : "-"
+                }
+            </div>
+            <div>
+                <label>Ficha de trabajo PDF</label><br>
+                ${
+                    item.fichaTrabajo
+                    ? `<button
+                        class="boton-doc"
+                        onclick="window.open('${item.fichaTrabajo}','_blank')">
+                        📄 Abrir ficha
+                    </button>`
+                    : "-"
+                }
+            </div>
+        </div>
+    </div>
+    `;
+}
 document.addEventListener("click", function(e){
     if(
         !e.target.closest(".card")
@@ -821,5 +1013,27 @@ s.src = 'https://script.google.com/macros/s/AKfycbx72WsrOFxUFiPPO_3m1Tke47bwPk4h
 document.body.appendChild(s);
 </script>
 
+<div id="modalFicha" class="modal-ficha">
+    <div class="modal-ficha-contenido">
+        <div class="modal-header">
+            <div>
+                <h2 id="modalTitulo">
+                    Ficha técnica
+                </h2>
+                <div id="modalChips">
+                </div>
+            </div>
+            <button
+                class="btn-cerrar"
+                onclick="cerrarFicha()">
+                ✕
+            </button>
+        </div>
+        <div id="contenidoFicha">
+        </div>
+    </div>
+
+</div> 
+    
 </body>
 </html>
