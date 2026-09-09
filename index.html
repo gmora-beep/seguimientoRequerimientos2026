@@ -1234,54 +1234,86 @@ function seleccionarEstatus(estatus){
             actualizarVistaActiva(
                 "Revisión PO",
                 "Análisis funcional",
-                document.getElementById("revisionpo").innerText
+                datos.filter(x => [
+                    "Pendiente de score",
+                    "Pendiente vo.bo",
+                    "En revisión con negocio",
+                    "En ideación HU",
+                    "Validación HU con negocio",
+                    "Redefinición"
+                ].includes((x.estatus || "").trim())).length
             );
             break;
         case "REVISION_TI":
             actualizarVistaActiva(
                 "Revisión TI",
                 "Validación técnica",
-                document.getElementById("estructuracion").innerText
+                datos.filter(x =>
+                    (x.estatus || "").trim() === "En estructuración"
+                ).length
             );
             break;
         case "EJECUCION":
             actualizarVistaActiva(
                 "En ejecución",
                 "Desarrollo y pruebas funcionales",
-                document.getElementById("desarrollo").innerText
+                datos.filter(x =>
+                    [
+                        "En desarrollo",
+                        "En pruebas",
+                        "Por liberar"
+                    ].includes((x.estatus || "").trim())
+                ).length
             );
             break;
         case "PREPARADO":
             actualizarVistaActiva(
                 "Preparado",
                 "Definido, pendiente ejecución",
-                document.getElementById("sprint").innerText
+                datos.filter(x =>
+                    (x.estatus || "").trim() === "Listo para sprint"
+                ).length
             );
             break;
         case "PAUSA":
             actualizarVistaActiva(
                 "Pausa",
                 "Planeadas para 2027",
-                document.getElementById("pausa").innerText
+                datos.filter(x =>
+                    (x.estatus || "").trim() === "Pausa"
+                ).length
             );
             break;
         case "CANCELADO":
             actualizarVistaActiva(
                 "Cancelado",
                 "Iniciativas canceladas",
-                document.getElementById("cancelado").innerText
+                datos.filter(x =>
+                    [
+                        "Cancelado",
+                        "No autorizado"
+                    ].includes((x.estatus || "").trim())
+                ).length
             );
             break;
         case "FINALIZADO":
             actualizarVistaActiva(
                 "Finalizado",
                 "Liberado a producción",
-                document.getElementById("finalizado").innerText
+                datos.filter(x =>
+                    [
+                        "Concluido",
+                        "Liberado a producción"
+                    ].includes(
+                        (x.estatus || "").trim()
+                    )
+                ).length
             );
             break;
     }
     aplicarFiltros();
 }
+            
 function cerrarFicha(){
     document.getElementById(
         "modalFicha"
