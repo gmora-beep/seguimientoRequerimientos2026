@@ -606,9 +606,14 @@ background:#f8fafc;
 }
     
 .vista-activa-descripcion{
-    margin-top:4px;
+    margin-top:0px;
     font-size:12px;
     color:#667085;
+}
+.vista-activa-info{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
 }
 </style>
 </head>
@@ -641,18 +646,28 @@ background:#f8fafc;
         Tablero operativo de seguimiento en tiempo real.
     </p>
 <div id="vistaActiva" class="vista-activa">
+    
     <div class="vista-activa-header">
+    <div class="vista-activa-info">
         <div
             id="vistaActivaNombre"
             class="vista-activa-nombre">
             Total requerimientos
         </div>
         <div
-            id="vistaActivaNumero"
-            class="vista-activa-numero">
-            0
+            id="vistaActivaDescripcion"
+            class="vista-activa-descripcion">
+            Iniciativas registradas
         </div>
     </div>
+    <div
+        id="vistaActivaNumero"
+        class="vista-activa-numero">
+        0
+    </div>
+</div>
+
+    
     <div
         id="vistaActivaDescripcion"
         class="vista-activa-descripcion">
