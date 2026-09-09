@@ -599,6 +599,7 @@ tr:hover{
 <script>
 
 let datos = [];
+let listaActual = [];
 let filtroEstatus = "";
 let filtroNegocio = "";
     
@@ -657,6 +658,7 @@ function aplicarFiltros(){
     renderizar(datosTabla, datosKPI);
 }
 function renderizar(lista, datosKPI = lista){
+    listaActual = [...lista];
     const ordenPrioridad = {
         "MUY ALTA": 1,
         "Muy Alta": 1,
@@ -735,11 +737,10 @@ lista.forEach((item,index) => {
 <td>
     <span
         class="link-requerimiento"
-        onclick="abrirFicha(item)">
+        onclick="abrirFichaPorIndice(${index})">
         ${item.nombre || ""}
     </span>
 </td>
-
     <td>
         ${item.responsable || "-"}
     </td>
@@ -861,6 +862,9 @@ function cerrarFicha(){
     document.getElementById(
         "modalFicha"
     ).style.display = "none";
+}
+function abrirFichaPorIndice(index){
+    abrirFicha(listaActual[index]);
 }
 function abrirFicha(item){
     document.getElementById(
