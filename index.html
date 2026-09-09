@@ -770,9 +770,13 @@ background:#f8fafc;
 </div>
 <div class="layout-principal">
     <aside class="barra-estatus">
-        <div class="estatus-item po">
-    <span class="estatus-label">Revisión PO</span>
-        </div>
+        <div class="estatus-item po"
+     onclick="seleccionarEstatus('REVISION_PO')">
+    <span class="estatus-label">
+        Revisión PO
+    </span>
+
+</div>
         <div class="estatus-item ti">
             <span class="estatus-label">Revisión TI</span>
         </div>  
@@ -959,6 +963,21 @@ function formatearFecha(fecha){
             year:"numeric"
         }
     );
+}
+function actualizarVistaActiva(
+    nombre,
+    descripcion,
+    total
+){
+    document.getElementById(
+        "vistaActivaNombre"
+    ).innerText = nombre;
+    document.getElementById(
+        "vistaActivaDescripcion"
+    ).innerText = descripcion;
+    document.getElementById(
+        "vistaActivaNumero"
+    ).innerText = total;
 }
 function aplicarFiltros(){
     let datosKPI = [...datos];
@@ -1232,6 +1251,14 @@ function limpiarFiltroEstatus(){
     .forEach(card => {
         card.classList.remove("card-activa");
     });
+    aplicarFiltros();
+}
+function seleccionarEstatus(estatus){
+    filtroEstatus = estatus;
+    aplicarFiltros();
+}
+function seleccionarEstatus(estatus){
+    filtroEstatus = estatus;
     aplicarFiltros();
 }
 function cerrarFicha(){
