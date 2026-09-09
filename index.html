@@ -944,7 +944,14 @@ function abrirFichaPorIndice(index){
     abrirFicha(listaActual[index]);
 }
 function abrirFicha(item){
-const prioridadClase = {
+    document.getElementById(
+        "modalFicha"
+    ).style.display = "block";
+    document.getElementById(
+        "modalTitulo"
+    ).innerText =
+        item.nombre || "";
+   const prioridadClase = {
     "Muy Alta":"chip-prioridad-muyalta",
     "Alta":"chip-prioridad-alta",
     "Media":"chip-prioridad-media",
