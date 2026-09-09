@@ -498,6 +498,7 @@ tr:hover{
 }
 .boton-doc:hover{
 background:#f8fafc;
+}
 .link-requerimiento{
     color:#01244a;
     font-weight:700;
@@ -972,9 +973,15 @@ document.getElementById(
     <span class="modal-chip ${estatusClaseModal}">
         ${item.estatus || "-"}
     </span>
-    <span class="modal-chip chip-sprint">
-        📅 ${item.sprint || "-"}
-    </span>
+    ${
+        item.sprint
+        ? `
+            <span class="modal-chip chip-sprint">
+                📅 Sprint ${item.sprint}
+            </span>
+          `
+        : ""
+    }
 `;
     document.getElementById(
         "contenidoFicha"
