@@ -687,7 +687,7 @@ lista.forEach(item => {
         item.fichaTrabajo
             ? `<button
                     class="btn-ficha"
-                    data-url="${item.fichaTrabajo}">
+                    onclick="window.open('${item.fichaTrabajo}','_blank')">
                     📄 Ficha
                </button>`
             : "-"
