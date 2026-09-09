@@ -388,7 +388,7 @@ tr:hover{
     position:absolute;
     top:0;
     right:0;
-    width:850px;
+    width:650px;
     max-width:90vw;
     height:100%;
     background:white;
@@ -446,7 +446,7 @@ tr:hover{
 .ficha-item div{
     font-size:14px;
     font-weight:600;
-    color:#1f2937;
+    color:#01244a;
 }
 ``
 .ficha-comentarios{
@@ -466,6 +466,8 @@ tr:hover{
     color:#2563eb;
     font-weight:600;
 }
+.boton-doc:hover{
+background:#f8fafc;
 .link-requerimiento{
     color:#01244a;
     font-weight:700;
@@ -474,6 +476,17 @@ tr:hover{
 }
 .link-requerimiento:hover{
     color:#0a3f63;
+}
+.badge-chip{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid #d9e2f2;
+    background:white;
+    color:#01244a;
+    font-size:12px;
+    font-weight:600;
+    margin-right:8px;
 }
 </style>
 </head>
@@ -635,6 +648,18 @@ function cargarLineasNegocio(){
             </option>
         `;
     });
+}
+function formatearFecha(fecha){
+    if(!fecha) return "-";
+    const d = new Date(fecha);
+    return d.toLocaleDateString(
+        "es-MX",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    );
 }
 function aplicarFiltros(){
     let datosKPI = [...datos];
@@ -884,21 +909,21 @@ function abrirFicha(item){
     ).innerText =
         item.nombre || "";
     document.getElementById(
-        "modalChips"
+    "modalChips"
     ).innerHTML = `
-        <span class="badge-tipo">
-            ${item.tipo || "-"}
-        </span>
-        <span class="badge-estatus">
-            ${item.prioridad || "-"}
-        </span>
-        <span class="badge-estatus">
-            ${item.estatus || "-"}
-        </span>
-        <span class="badge-estatus">
-            ${item.sprint || "-"}
-        </span>
-    `;
+    <span class="badge-tipo">
+        ${item.tipo || "-"}
+    </span>
+    <span class="badge-chip">
+        ${item.prioridad || "-"}
+    </span>
+    <span class="badge-chip">
+        ${item.estatus || "-"}
+    </span>
+    <span class="badge-chip">
+        ${item.sprint || "-"}
+    </span>
+`;
     document.getElementById(
         "contenidoFicha"
     ).innerHTML = `
@@ -915,7 +940,7 @@ function abrirFicha(item){
             </div>
             <div class="ficha-item">
                 <label>Fecha registro de iniciativa</label>
-                <div>${item.fecha || "-"}</div>
+                <div>${formatearFecha(item.fecha)}</div>
             </div>
             <div class="ficha-item">
                 <label>HU</label>
@@ -939,39 +964,49 @@ function abrirFicha(item){
             </div>
             <div class="ficha-item">
                 <label>Fecha de liberación</label>
-                <div>${item.fechaLiberacion || "-"}</div>
+                <div>${formatearFecha(item.fechaLiberacion)}</div>
             </div>
         </div>
     </div>
     <div class="modal-seccion">
-        <h3>3. Documentación</h3>
-        <div class="ficha-grid">
-            <div>
-                <label>Score PDF</label><br>
-                ${
-                    item.scorePdf
-                    ? `<button
-                        class="boton-doc"
-                        onclick="window.open('${item.scorePdf}','_blank')">
-                        📊 Abrir Score
-                    </button>`
-                    : "-"
-                }
-            </div>
-            <div>
-                <label>Ficha de trabajo PDF</label><br>
-                ${
-                    item.fichaTrabajo
-                    ? `<button
-                        class="boton-doc"
-                        onclick="window.open('${item.fichaTrabajo}','_blank')">
-                        📄 Abrir ficha
-                    </button>`
-                    : "-"
-                }
-            </div>
+    <h3>
+        3. Documentación
+    </h3>
+    <div class="ficha-grid">
+        <div>
+            <label>
+                Score PDF
+            </label>
+            <br><br>
+            ${
+                item.scorePdf
+                ? `<button
+                     class="boton-doc"
+                     onclick="window.open('${item.scorePdf}','_blank')">
+                     📊 Abrir Score
+                   </button>`
+                : "-"
+            }
+        </div>
+        <div>
+            <label>
+                Ficha de trabajo PDF
+            </label>
+            <br><br>
+            ${
+                item.fichaTrabajo
+                ? `<button
+                     class="boton-doc"
+                     onclick="window.open('${item.fichaTrabajo}','_blank')">
+
+                     📄 Abrir ficha
+
+                   </button>`
+                : "-"
+            }
         </div>
     </div>
+</div>
     `;
 }
 document.addEventListener("click", function(e){
