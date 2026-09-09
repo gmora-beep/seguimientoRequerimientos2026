@@ -408,11 +408,20 @@ tr:hover{
 .modal-ficha{
     display:none;
     position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.20);
+    top:0;
+    right:0;
+    width:650px;
+    height:100%;
     z-index:9999;
-    padding:0px;
-    overflow:auto;
+    pointer-events:none;
+    background:transparent;
+}
+.modal-ficha-contenido{
+    pointer-events:auto;
+}
+.requerimiento-activo{
+    background:#eef6ff;
+    border-left:4px solid #01244a;
 }
 .modal-ficha-contenido{
     position:absolute;
