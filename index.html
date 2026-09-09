@@ -1038,40 +1038,37 @@ document.getElementById(
     <h3>
         3. Documentación
     </h3>
-    <div class="ficha-grid">
-        <div>
-            <label>
-                Score PDF
-            </label>
-            <br><br>
-            ${
-                item.scorePdf
-                ? `<button
-                     class="boton-doc"
-                     onclick="window.open('${item.scorePdf}','_blank')">
-                     📊 Abrir Score
-                   </button>`
-                : "-"
-            }
-        </div>
-        <div>
-            <label>
-                Ficha de trabajo PDF
-            </label>
-            <br><br>
-            ${
-                item.fichaTrabajo
-                ? `<button
-                     class="boton-doc"
-                     onclick="window.open('${item.fichaTrabajo}','_blank')">
-
-                     📄 Abrir ficha
-
-                   </button>`
-                : "-"
-            }
-        </div>
+    <div class="ficha-item">
+    <label>
+        Score PDF
+    </label>
+    <div>
+        ${
+            item.scorePdf
+            ? `<button
+                 class="boton-doc"
+                 onclick="window.open('${item.scorePdf}','_blank')">
+                 📊
+               </button>`
+            : "-"
+        }
     </div>
+<div class="ficha-item">
+    <label>
+        Ficha de trabajo PDF
+    </label>
+    <div>
+        ${
+            item.fichaTrabajo
+            ? `<button
+                 class="boton-doc"
+                 onclick="window.open('${item.fichaTrabajo}','_blank')">
+                 📄
+               </button>`
+            : "-"
+        }
+    </div>
+
 </div>
     `;
 }
