@@ -619,14 +619,14 @@ background:#f8fafc;
     display:flex;
     align-items:flex-start;
     gap:8px;
+    margin-left:-18px;
 }
 .contenido-dashboard{
     flex:1;
 }
 .barra-estatus{
     position:sticky;
-    top:0;
-    margin-top:-95px;
+    top:76px;
     width:42px;
     min-width:42px;
     align-self:flex-start;
@@ -640,9 +640,10 @@ background:#f8fafc;
     display:flex;
     flex-direction:column;
     align-items:center;
+    justify-content:flex-start;
     gap:14px;
     padding:20px 0;
-    min-height:700px;
+    min-height:calc(100vh - 76px);
 }
 .contenido-principal{
     flex:1;
@@ -703,11 +704,13 @@ background:#f8fafc;
 </div>
 
 <div class="contenido">
-    <h1>Seguimiento requerimientos de originación</h1>
+    <h1>
+        Seguimiento requerimientos de originación
+    </h1>
     <p class="descripcion">
         Tablero operativo de seguimiento en tiempo real.
     </p>
-
+</div>
 <div class="layout-principal">
     <aside class="barra-estatus">
         <div class="estatus-item po"></div>
@@ -719,30 +722,29 @@ background:#f8fafc;
         <div class="estatus-item finalizado"></div>
     </aside>
     <div class="contenido-dashboard">
-    <div id="vistaActiva" class="vista-activa">
-        <div class="vista-activa-header">
-        <div class="vista-activa-info">
-            <div
-                id="vistaActivaNombre"
-                class="vista-activa-nombre">
-                Total requerimientos
-            </div>
-            <div
-                id="vistaActivaDescripcion"
-                class="vista-activa-descripcion">
-                Iniciativas registradas
+        <div id="vistaActiva" class="vista-activa">
+            <div class="vista-activa-header">
+                <div class="vista-activa-info">
+                    <div
+                        id="vistaActivaNombre"
+                        class="vista-activa-nombre">
+                        Total requerimientos
+                    </div>
+                    <div
+                        id="vistaActivaDescripcion"
+                        class="vista-activa-descripcion">
+                        Iniciativas registradas
+                    </div>
+                </div>
+                <div
+                    id="vistaActivaNumero"
+                    class="vista-activa-numero">
+                    0
+                </div>
             </div>
         </div>
-        <div
-            id="vistaActivaNumero"
-            class="vista-activa-numero">
-            0
-        </div>
-    </div>
-</div>
 
-    
-<div class="cards">
+        <div class="cards">
     <div class="card card-total" id="card-total">
         <div class="card-titulo">Total requerimientos</div>
         <div class="numero" id="total">0</div>
