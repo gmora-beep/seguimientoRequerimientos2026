@@ -758,26 +758,71 @@ function aplicarFiltros(){
         );
     }
     let datosTabla = [...datosKPI];
-    if(filtroEstatus !== ""){
-        if(filtroEstatus === "REVISION_PO"){
-            datosTabla = datosTabla.filter(item => {
-                const estatus =
-                    (item.estatus || "").trim();
-                return ![
-                    "En desarrollo",
-                    "En pruebas",
-                    "Listo para sprint",
-                    "En estructuración",
-                    "Cancelado"
-                ].includes(estatus);
-            });
-        }else{
-            datosTabla = datosTabla.filter(item =>
-                (item.estatus || "").trim()
-                === filtroEstatus
-            );
-        }
+if(filtroEstatus !== ""){
+    if(filtroEstatus === "REVISION_PO"){
+        datosTabla = datosTabla.filter(item => {
+            const estatus =
+                (item.estatus || "").trim();
+            return [
+                "Pendiente de score",
+                "Pendiente vo.bo",
+                "En revisión con negocio",
+                "En ideación HU",
+                "Validación HU con negocio",
+                "Redefinición"
+            ].includes(estatus);
+        });
     }
+    else if(filtroEstatus === "REVISION_TI"){
+        datosTabla = datosTabla.filter(item =>
+            (item.estatus || "").trim()
+            === "En estructuración"
+        );
+    }
+    else if(filtroEstatus === "EJECUCION"){
+        datosTabla = datosTabla.filter(item => {
+            const estatus =
+                (item.estatus || "").trim();
+            return [
+                "En desarrollo",
+                "En pruebas",
+                "Por liberar"
+            ].includes(estatus);
+        });
+    }
+    else if(filtroEstatus === "PREPARADO"){
+        datosTabla = datosTabla.filter(item =>
+            (item.estatus || "").trim()
+            === "Listo para sprint"
+        );
+    }
+    else if(filtroEstatus === "PAUSA"){
+        datosTabla = datosTabla.filter(item =>
+            (item.estatus || "").trim()
+            === "Pausa"
+        );
+    }
+    else if(filtroEstatus === "CANCELADO"){
+        datosTabla = datosTabla.filter(item => {
+            const estatus =
+                (item.estatus || "").trim();
+            return [
+                "Cancelado",
+                "No autorizado"
+            ].includes(estatus);
+        });
+    }
+    else if(filtroEstatus === "FINALIZADO"){
+        datosTabla = datosTabla.filter(item => {
+            const estatus =
+                (item.estatus || "").trim();
+            return [
+                "Concluido",
+                "Liberado a producción"
+            ].includes(estatus);
+        });
+    }
+}
     renderizar(datosTabla, datosKPI);
 }
 function renderizar(lista, datosKPI = lista){
@@ -1149,13 +1194,13 @@ document.getElementById("card-po")
 });
 document.getElementById("card-estructura")
 .addEventListener("click",()=>{
-    filtroEstatus = "En estructuración";
+    filtroEstatus = "REVISION_TI";
     activarTarjeta("card-estructura");
     aplicarFiltros();
 });
 document.getElementById("card-desarrollo")
 .addEventListener("click",()=>{
-    filtroEstatus = "En desarrollo";
+    filtroEstatus = "EJECUCION";
     activarTarjeta("card-desarrollo");
     aplicarFiltros();
 });
@@ -1167,14 +1212,26 @@ document.getElementById("card-pruebas")
 });
 document.getElementById("card-sprint")
 .addEventListener("click",()=>{
-    filtroEstatus = "Listo para sprint";
+    filtroEstatus = "PREPARADO";
     activarTarjeta("card-sprint");
+    aplicarFiltros();
+});
+document.getElementById("card-pausa")
+.addEventListener("click",()=>{
+    filtroEstatus = "PAUSA";
+    activarTarjeta("card-pausa");
     aplicarFiltros();
 });
 document.getElementById("card-cancelado")
 .addEventListener("click",()=>{
-    filtroEstatus = "Cancelado";
+    filtroEstatus = "CANCELADO";
     activarTarjeta("card-cancelado");
+    aplicarFiltros();
+});
+document.getElementById("card-finalizado")
+.addEventListener("click",()=>{
+    filtroEstatus = "FINALIZADO";
+    activarTarjeta("card-finalizado");
     aplicarFiltros();
 });
 </script>
