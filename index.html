@@ -499,8 +499,8 @@ tr:hover{
     font-size:18px;
     cursor:pointer;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
 }
 .boton-doc:hover{
 background:#f8fafc;
@@ -537,6 +537,14 @@ background:#f8fafc;
     margin-top:4px;
     border:1px solid transparent;
 }
+.ficha-docs{
+    display:grid;
+    grid-template-columns:
+        1fr 1fr 1fr;
+    gap:30px;
+    margin-top:10px;
+}
+`
 </style>
 </head>
 
@@ -1042,54 +1050,50 @@ document.getElementById(
     <h3>
         3. Documentación
     </h3>
+<div class="ficha-docs">
     <div class="ficha-item">
-    <label>
-        Score PDF
-    </label>
-    <div>
-        ${
-            item.scorePdf
-            ? `<button
-                 class="boton-doc"
-                 onclick="window.open('${item.scorePdf}','_blank')">
-                 📊
-               </button>`
-            : "-"
-        }
+        <label>Score PDF</label>
+        <div>
+            ${
+                item.scorePdf
+                ? `<button
+                     class="boton-doc"
+                     onclick="window.open('${item.scorePdf}','_blank')">
+                     📊
+                   </button>`
+                : "-"
+            }
+        </div>
     </div>
-<div class="ficha-item">
-    <label>
-        Ficha de trabajo PDF
-    </label>
-    <div>
-        ${
-            item.fichaTrabajo
-            ? `<button
-                 class="boton-doc"
-                 onclick="window.open('${item.fichaTrabajo}','_blank')">
-                 📄
-               </button>`
-            : "-"
-        }
+    <div class="ficha-item">
+        <label>Ficha de trabajo PDF</label>
+        <div>
+            ${
+                item.fichaTrabajo
+                ? `<button
+                     class="boton-doc"
+                     onclick="window.open('${item.fichaTrabajo}','_blank')">
+                     📄
+                   </button>`
+                : "-"
+            }
+        </div>
     </div>
-<div class="ficha-item">
-                <label>HU</label>
-                <div>
-                    ${
-                        item.hu
-                        ? `<button
-                             class="boton-doc"
-                             title="Abrir Historia de Usuario"
-                             onclick="window.open('${item.hu}','_blank')">
-                             📋
-                           </button>`
-                        : "-"
-                    }
-                </div>
-            </div>
+    <div class="ficha-item">
+        <label>HU</label>
+        <div>
+            ${
+                item.hu
+                ? `<button
+                     class="boton-doc"
+                     onclick="window.open('${item.hu}','_blank')">
+                     📋
+                   </button>`
+                : "-"
+            }
+        </div>
+    </div>
 </div>
-    `;
-}
 document.addEventListener("click", function(e){
     if(
         !e.target.closest(".card")
