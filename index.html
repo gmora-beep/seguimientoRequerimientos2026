@@ -796,11 +796,12 @@ function renderizar(lista, datosKPI = lista){
                Number(a.score || 0);
     });
 
-    let desarrollo = 0;
-    let pruebas = 0;
-    let sprint = 0;
-    let estructuracion = 0;
+    let revisionTI = 0;
+    let ejecucion = 0;
+    let preparado = 0;
+    let pausa = 0;
     let cancelado = 0;
+    let finalizado = 0;
 
     const tabla =
         document.getElementById("tabla");
@@ -808,16 +809,28 @@ function renderizar(lista, datosKPI = lista){
     datosKPI.forEach(item => {
     const estatus =
         (item.estatus || "").trim();
-    if(estatus === "En desarrollo")
-        desarrollo++;
-    if(estatus === "En pruebas")
-        pruebas++;
-    if(estatus === "Listo para sprint")
-        sprint++;
-    if(estatus === "En estructuración")
-        estructuracion++;
-    if(estatus === "Cancelado")
-        cancelado++;
+if(estatus === "En estructuración")
+    revisionTI++;
+if(
+    estatus === "En desarrollo" ||
+    estatus === "En pruebas" ||
+    estatus === "Por liberar"
+)
+    ejecucion++;
+if(estatus === "Listo para sprint")
+    preparado++;
+if(estatus === "Pausa")
+    pausa++;
+if(
+    estatus === "Cancelado" ||
+    estatus === "No autorizado"
+)
+    cancelado++;
+if(
+    estatus === "Concluido" ||
+    estatus === "Liberado a producción"
+)
+    finalizado++;
 });
 lista.forEach((item,index) => {
     let estatusClase = "estatus-po";
@@ -903,28 +916,34 @@ lista.forEach((item,index) => {
 `;
 
 });
-    const revisionPO =
-        datosKPI.length
-        - desarrollo
-        - pruebas
-        - sprint
-        - estructuracion
-        - cancelado;
+const revisionPO =
+    datosKPI.filter(x => [
+        "Pendiente de score",
+        "Pendiente vo.bo",
+        "En revisión con negocio",
+        "En ideación HU",
+        "Validación HU con negocio",
+        "Redefinición"
+    ].includes(
+        (x.estatus || "").trim()
+    )).length;
     
     document.getElementById("total").innerText =
     datosKPI.length;
-    document.getElementById("desarrollo").innerText =
-        desarrollo;
-    document.getElementById("pruebas").innerText =
-        pruebas;
-    document.getElementById("sprint").innerText =
-        sprint;
     document.getElementById("revisionpo").innerText =
-    revisionPO;
+        revisionPO;
     document.getElementById("estructuracion").innerText =
-        estructuracion;
+        revisionTI;
+    document.getElementById("desarrollo").innerText =
+        ejecucion;
+    document.getElementById("sprint").innerText =
+        preparado;
+    document.getElementById("pausa").innerText =
+        pausa;
     document.getElementById("cancelado").innerText =
         cancelado;
+    document.getElementById("finalizado").innerText =
+        finalizado;
 }
 document.getElementById("buscar")
 .addEventListener("input",function(){
