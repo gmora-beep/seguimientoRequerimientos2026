@@ -582,7 +582,27 @@ background:#f8fafc;
     0 4px 12px rgba(0,0,0,.08);
     border-left:5px solid #01244a;
 }
-
+.vista-po{
+    border-left-color:#f59e0b;
+}
+.vista-ti{
+    border-left-color:#8b5cf6;
+}
+.vista-ejecucion{
+    border-left-color:#10b981;
+}
+.vista-preparado{
+    border-left-color:#0ea5c6;
+}
+.vista-pausa{
+    border-left-color:#6b7280;
+}
+.vista-cancelado{
+    border-left-color:#ef4444;
+}
+.vista-finalizado{
+    border-left-color:#10b981;
+}
 .vista-activa-header{
     display:flex;
     justify-content:space-between;
@@ -659,11 +679,11 @@ background:#f8fafc;
 }
 ``
 
-    .estatus-item.activo{
-    transform:scale(1.35);
+.estatus-item.activo::before{
+    transform:scale(1.5);
     box-shadow:
-        0 0 0 4px rgba(255,255,255,.20);
-    border-radius:50%;
+        0 0 0 4px rgba(255,255,255,.25),
+        0 0 12px rgba(255,255,255,.45);
 }
 
 .estatus-item:hover{
@@ -848,8 +868,6 @@ background:#f8fafc;
             </div>
         </div>
 
-        <div class="cards"></div>
-
 <div class="filtros">
     <label class="titulo-filtro">
         Línea de negocio
@@ -931,6 +949,20 @@ function actualizarVistaActiva(
     descripcion,
     total
 ){
+function actualizarColorVista(clase){
+    const vista =
+        document.getElementById("vistaActiva");
+    vista.classList.remove(
+        "vista-po",
+        "vista-ti",
+        "vista-ejecucion",
+        "vista-preparado",
+        "vista-pausa",
+        "vista-cancelado",
+        "vista-finalizado"
+    );
+    vista.classList.add(clase);
+}
     document.getElementById(
         "vistaActivaNombre"
     ).innerText = nombre;
@@ -1232,6 +1264,7 @@ function seleccionarEstatus(estatus){
     switch(estatus){
         case "REVISION_PO":
             actualizarVistaActiva(
+                actualizarColorVista("vista-po");
                 "Revisión PO",
                 "Análisis funcional",
                 datos.filter(x => [
@@ -1246,6 +1279,7 @@ function seleccionarEstatus(estatus){
             break;
         case "REVISION_TI":
             actualizarVistaActiva(
+                actualizarColorVista("vista-ti");
                 "Revisión TI",
                 "Validación técnica",
                 datos.filter(x =>
@@ -1255,6 +1289,7 @@ function seleccionarEstatus(estatus){
             break;
         case "EJECUCION":
             actualizarVistaActiva(
+                actualizarColorVista("vista-ejecucion");
                 "En ejecución",
                 "Desarrollo y pruebas funcionales",
                 datos.filter(x =>
@@ -1268,6 +1303,7 @@ function seleccionarEstatus(estatus){
             break;
         case "PREPARADO":
             actualizarVistaActiva(
+                actualizarColorVista("vista-preparado");
                 "Preparado",
                 "Definido, pendiente ejecución",
                 datos.filter(x =>
@@ -1277,6 +1313,7 @@ function seleccionarEstatus(estatus){
             break;
         case "PAUSA":
             actualizarVistaActiva(
+                actualizarColorVista("vista-pausa");
                 "Pausa",
                 "Planeadas para 2027",
                 datos.filter(x =>
@@ -1286,6 +1323,7 @@ function seleccionarEstatus(estatus){
             break;
         case "CANCELADO":
             actualizarVistaActiva(
+                actualizarColorVista("vista-cancelado");
                 "Cancelado",
                 "Iniciativas canceladas",
                 datos.filter(x =>
@@ -1298,6 +1336,7 @@ function seleccionarEstatus(estatus){
             break;
         case "FINALIZADO":
             actualizarVistaActiva(
+                actualizarColorVista("vista-finalizado");
                 "Finalizado",
                 "Liberado a producción",
                 datos.filter(x =>
@@ -1485,6 +1524,9 @@ document.getElementById("card-total")
     "Iniciativas registradas",
     datos.length
 );
+document.getElementById(
+    "vistaActiva"
+).className = "vista-activa";
     aplicarFiltros();
 });
 document.getElementById("card-po")
