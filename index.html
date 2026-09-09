@@ -1016,10 +1016,6 @@ document.getElementById(
                 <label>Fecha registro de iniciativa</label>
                 <div>${formatearFecha(item.fecha)}</div>
             </div>
-            <div class="ficha-item">
-                <label>HU</label>
-                <div>${item.hu || "-"}</div>
-            </div>
         </div>
         <div class="ficha-comentarios">
             ${item.comentarios || "-"}
@@ -1076,7 +1072,21 @@ document.getElementById(
             : "-"
         }
     </div>
-
+<div class="ficha-item">
+                <label>HU</label>
+                <div>
+                    ${
+                        item.hu
+                        ? `<button
+                             class="boton-doc"
+                             title="Abrir Historia de Usuario"
+                             onclick="window.open('${item.hu}','_blank')">
+                             📋
+                           </button>`
+                        : "-"
+                    }
+                </div>
+            </div>
 </div>
     `;
 }
