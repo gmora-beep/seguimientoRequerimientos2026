@@ -1032,15 +1032,10 @@ document.getElementById(
     <span class="modal-chip ${estatusClaseModal}">
         ${item.estatus || "-"}
     </span>
-    ${
-    item.sprint
-    ? `
-        <span class="modal-chip chip-sprint">
+    <span class="modal-chip chip-sprint">
         📅 ${item.sprint || "Sin Sprint"}
     </span>
-      `
-    : ""
-}
+`;
     document.getElementById(
         "contenidoFicha"
     ).innerHTML = `
