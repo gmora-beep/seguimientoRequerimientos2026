@@ -1216,10 +1216,6 @@ const revisionPO =
     
     document.getElementById("total").innerText =
     datosKPI.length;
-    document.getElementById(
-    "vistaActivaNumero"
-    ).innerText =
-    datosKPI.length;
     document.getElementById("revisionpo").innerText =
         revisionPO;
     document.getElementById("estructuracion").innerText =
@@ -1277,13 +1273,63 @@ function limpiarFiltroEstatus(){
     });
     aplicarFiltros();
 }
+    
 function seleccionarEstatus(estatus){
     filtroEstatus = estatus;
+    switch(estatus){
+        case "REVISION_PO":
+            actualizarVistaActiva(
+                "Revisión PO",
+                "Análisis funcional",
+                document.getElementById("revisionpo").innerText
+            );
+            break;
+        case "REVISION_TI":
+            actualizarVistaActiva(
+                "Revisión TI",
+                "Validación técnica",
+                document.getElementById("estructuracion").innerText
+            );
+            break;
+        case "EJECUCION":
+            actualizarVistaActiva(
+                "En ejecución",
+                "Desarrollo y pruebas funcionales",
+                document.getElementById("desarrollo").innerText
+            );
+            break;
+        case "PREPARADO":
+            actualizarVistaActiva(
+                "Preparado",
+                "Definido, pendiente ejecución",
+                document.getElementById("sprint").innerText
+            );
+            break;
+        case "PAUSA":
+            actualizarVistaActiva(
+                "Pausa",
+                "Planeadas para 2027",
+                document.getElementById("pausa").innerText
+            );
+            break;
+        case "CANCELADO":
+            actualizarVistaActiva(
+                "Cancelado",
+                "Iniciativas canceladas",
+                document.getElementById("cancelado").innerText
+            );
+            break;
+        case "FINALIZADO":
+            actualizarVistaActiva(
+                "Finalizado",
+                "Liberado a producción",
+                document.getElementById("finalizado").innerText
+            );
+            break;
+    }
     aplicarFiltros();
 }
-function seleccionarEstatus(estatus){
-    filtroEstatus = estatus;
-    aplicarFiltros();
+
 }
 function cerrarFicha(){
     document.getElementById(
@@ -1449,6 +1495,11 @@ document.getElementById("card-total")
 .addEventListener("click",()=>{
     filtroEstatus = "";
     activarTarjeta("card-total");
+    actualizarVistaActiva(
+    "Total requerimientos",
+    "Iniciativas registradas",
+    datos.length
+);
     aplicarFiltros();
 });
 document.getElementById("card-po")
