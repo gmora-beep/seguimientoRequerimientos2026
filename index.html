@@ -646,10 +646,6 @@ background:#f8fafc;
     padding:20px 10px;
     min-height:calc(100vh - 76px);
 }
-.barra-estatus:hover{
-    width:220px;
-    min-width:220px;
-}
 .contenido-principal{
     flex:1;
 }
@@ -682,21 +678,41 @@ background:#f8fafc;
     left:28px;
     top:50%;
     transform:translateY(-50%);
-    background:white;
-    color:#01244a;
     padding:8px 12px;
-    border-radius:10px;
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.12);
+    border-radius:12px;
+    color:white;
     font-size:13px;
     font-weight:600;
     white-space:nowrap;
     opacity:0;
     pointer-events:none;
     transition:.2s;
+    z-index:1000;
 }
 .estatus-item:hover .estatus-label{
     opacity:1;
+}
+.po .estatus-label{
+    background:#f59e0b;
+}
+
+.ti .estatus-label{
+    background:#8b5cf6;
+}
+.ejecucion .estatus-label{
+    background:#16a34a;
+}
+.preparado .estatus-label{
+    background:#0891b2;
+}
+.pausa .estatus-label{
+    background:#6b7280;
+}
+.cancelado .estatus-label{
+    background:#ef4444;
+}
+.finalizado .estatus-label{
+    background:#10b981;
 }
     
 .po{
