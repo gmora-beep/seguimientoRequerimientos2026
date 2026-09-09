@@ -491,12 +491,21 @@ tr:hover{
     color:#01244a;
 }
 .ficha-comentarios{
+    margin-top:18px;
     min-height:40px;
     font-size:13px;
     background:#f8fafc;
     border:1px solid #e5e7eb;
     border-radius:12px;
     padding:12px;
+}
+.ficha-label-comentarios{
+    display:block;
+    margin-top:18px;
+    margin-bottom:8px;
+    font-size:12px;
+    font-weight:700;
+    color:#667085;
 }
 .boton-doc{
     width:42px;
@@ -1051,10 +1060,13 @@ document.getElementById(
                 <label>Fecha registro de iniciativa</label>
                 <div>${formatearFecha(item.fecha)}</div>
             </div>
-        </div>
-        <div class="ficha-comentarios">
-            ${item.comentarios || "-"}
-        </div>
+     </div>
+     <label class="ficha-label-comentarios">
+        Comentarios
+    </label>
+    <div class="ficha-comentarios">
+        ${item.comentarios || "-"}
+    </div>
     </div>
     <div class="modal-seccion">
         <h3>2. Información de desarrollo</h3>
