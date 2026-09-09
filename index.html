@@ -881,9 +881,6 @@ lista.forEach((item,index) => {
         ${item.responsable || "-"}
     </td>
     <td>
-        ${item.score || "-"}
-    </td>
-    <td>
         ${item.prioridad || "-"}
     </td>
     <td>
@@ -903,30 +900,6 @@ lista.forEach((item,index) => {
             </div>
         </div>
     </td>
-<td>
-    ${
-        item.scorePdf
-            ? `<button
-                    class="btn-ficha"
-                    title="Abrir Score PDF"
-                    onclick="window.open('${item.scorePdf}','_blank')">
-                    📊 Score
-               </button>`
-            : "-"
-    }
-</td>
-<td>
-    ${
-        item.fichaTrabajo
-            ? `<button
-                    class="btn-ficha"
-                    title="Abrir Ficha de trabajo"
-                    onclick="window.open('${item.fichaTrabajo}','_blank')">
-                    📄 Ficha
-               </button>`
-            : "-"
-    }
-</td>
 </tr>
 `;
 
