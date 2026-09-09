@@ -544,7 +544,25 @@ background:#f8fafc;
     gap:30px;
     margin-top:10px;
 }
-`
+.chip-prioridad-muyalta,
+.chip-prioridad-alta,
+.chip-prioridad-media,
+.chip-prioridad-baja,
+.chip-estatus-desarrollo,
+.chip-estatus-pruebas,
+.chip-estatus-estructuracion,
+.chip-estatus-cancelado,
+.chip-estatus-po,
+.chip-sprint{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:30px;
+    padding:0 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+}
 </style>
 </head>
 
@@ -1094,6 +1112,8 @@ document.getElementById(
         </div>
     </div>
 </div>
+`;
+}
 document.addEventListener("click", function(e){
     if(
         !e.target.closest(".card")
