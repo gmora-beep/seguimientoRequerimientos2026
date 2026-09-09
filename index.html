@@ -317,14 +317,16 @@ tbody td{
 tbody tr:hover{
     background:#f8fafc;
 }
-.badge-tipo{
-    display:inline-block;
-    padding:3px 8px;
+.badge-tipo,
+.modal-chip{
+    display:inline-flex;
+    align-items:center;
+    height:28px;
+    padding:0 12px;
     border-radius:999px;
-    font-size:10px;
+    font-size:12px;
     font-weight:600;
-    background:#fff1e6;
-    color:#ff6b00;
+    margin-right:8px;
 }
 .chip-prioridad-muyalta{
     background:#fee2e2;
@@ -477,7 +479,6 @@ tr:hover{
     font-weight:600;
     color:#01244a;
 }
-``
 .ficha-comentarios{
     min-height:90px;
     font-size:13px;
@@ -486,7 +487,6 @@ tr:hover{
     border-radius:12px;
     padding:15px;
 }
-``
 .boton-doc{
     min-width:160px;
     height:38px;
@@ -943,71 +943,23 @@ function abrirFichaPorIndice(index){
     abrirFicha(listaActual[index]);
 }
 function abrirFicha(item){
-    document.getElementById(
-        "modalFicha"
-    ).style.display = "block";
-    document.getElementById(
-        "modalTitulo"
-    ).innerText =
-        item.nombre || "";
-    document.getElementById(
-    "modalChips"
-    ).innerHTML = `
-    const prioridadClase = {
-
+const prioridadClase = {
     "Muy Alta":"chip-prioridad-muyalta",
     "Alta":"chip-prioridad-alta",
     "Media":"chip-prioridad-media",
     "Baja":"chip-prioridad-baja"
-
 }[item.prioridad] || "chip-prioridad-alta";
-
 let estatusClaseModal = "chip-estatus-po";
-
 if(item.estatus === "En desarrollo")
     estatusClaseModal = "chip-estatus-desarrollo";
-
 if(item.estatus === "En pruebas")
     estatusClaseModal = "chip-estatus-pruebas";
-
 if(item.estatus === "Listo para sprint")
     estatusClaseModal = "chip-estatus-sprint";
-
 if(item.estatus === "En estructuración")
     estatusClaseModal = "chip-estatus-estructuracion";
-
 if(item.estatus === "Cancelado")
     estatusClaseModal = "chip-estatus-cancelado";
-
-document.getElementById(
-    "modalChips"
-).innerHTML = `
-    const prioridadClase = {
-
-    "Muy Alta":"chip-prioridad-muyalta",
-    "Alta":"chip-prioridad-alta",
-    "Media":"chip-prioridad-media",
-    "Baja":"chip-prioridad-baja"
-
-}[item.prioridad] || "chip-prioridad-alta";
-
-let estatusClaseModal = "chip-estatus-po";
-
-if(item.estatus === "En desarrollo")
-    estatusClaseModal = "chip-estatus-desarrollo";
-
-if(item.estatus === "En pruebas")
-    estatusClaseModal = "chip-estatus-pruebas";
-
-if(item.estatus === "Listo para sprint")
-    estatusClaseModal = "chip-estatus-sprint";
-
-if(item.estatus === "En estructuración")
-    estatusClaseModal = "chip-estatus-estructuracion";
-
-if(item.estatus === "Cancelado")
-    estatusClaseModal = "chip-estatus-cancelado";
-
 document.getElementById(
     "modalChips"
 ).innerHTML = `
