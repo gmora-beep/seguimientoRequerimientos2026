@@ -615,6 +615,62 @@ background:#f8fafc;
     flex-direction:column;
     gap:4px;
 }
+.layout-principal{
+    display:flex;
+    align-items:flex-start;
+    gap:20px;
+}
+.barra-estatus{
+    width:60px;
+    min-width:60px;
+    border-radius:18px;
+    padding:15px 0;
+    background:linear-gradient(
+        180deg,
+        #01244a 0%,
+        #0a3f63 40%,
+        #11566b 100%
+    );
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+}
+.contenido-principal{
+    flex:1;
+}
+.estatus-item{
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    cursor:pointer;
+    transition:.2s;
+}
+.estatus-item:hover{
+    transform:scale(1.25);
+}
+.po{
+    background:#f59e0b;
+}
+.ti{
+    background:#8b5cf6;
+}
+.ejecucion{
+    background:#10b981;
+}
+.preparado{
+    background:#0ea5c6;
+}
+.pausa{
+    background:#6b7280;
+}
+.cancelado{
+    background:#ef4444;
+}
+.finalizado{
+    background:#10b981;
+}
+``
 </style>
 </head>
 
@@ -639,9 +695,7 @@ background:#f8fafc;
 </div>
 
 <div class="contenido">
-
     <h1>Seguimiento requerimientos de originación</h1>
-
     <p class="descripcion">
         Tablero operativo de seguimiento en tiempo real.
     </p>
@@ -667,8 +721,19 @@ background:#f8fafc;
     </div>
 </div>
 
+<div class="layout-principal">
+    <div class="barra-estatus">
+        <div class="estatus-item po"></div>
+        <div class="estatus-item ti"></div>
+        <div class="estatus-item ejecucion"></div>
+        <div class="estatus-item preparado"></div>
+        <div class="estatus-item pausa"></div>
+        <div class="estatus-item cancelado"></div>
+        <div class="estatus-item finalizado"></div>
+    </div>
+<div class="contenido-principal">
+    
 <div class="cards">
-
     <div class="card card-total" id="card-total">
         <div class="card-titulo">Total requerimientos</div>
         <div class="numero" id="total">0</div>
