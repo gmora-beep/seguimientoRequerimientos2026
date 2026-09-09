@@ -707,7 +707,19 @@ background:#f8fafc;
     <p class="descripcion">
         Tablero operativo de seguimiento en tiempo real.
     </p>
-<div id="vistaActiva" class="vista-activa">
+
+<div class="layout-principal">
+    <aside class="barra-estatus">
+        <div class="estatus-item po"></div>
+        <div class="estatus-item ti"></div>
+        <div class="estatus-item ejecucion"></div>
+        <div class="estatus-item preparado"></div>
+        <div class="estatus-item pausa"></div>
+        <div class="estatus-item cancelado"></div>
+        <div class="estatus-item finalizado"></div>
+    </aside>
+    <div class="contenido-dashboard">
+    <div id="vistaActiva" class="vista-activa">
         <div class="vista-activa-header">
         <div class="vista-activa-info">
             <div
@@ -729,17 +741,6 @@ background:#f8fafc;
     </div>
 </div>
 
-<div class="layout-principal">
-    <aside class="barra-estatus">
-        <div class="estatus-item po"></div>
-        <div class="estatus-item ti"></div>
-        <div class="estatus-item ejecucion"></div>
-        <div class="estatus-item preparado"></div>
-        <div class="estatus-item pausa"></div>
-        <div class="estatus-item cancelado"></div>
-        <div class="estatus-item finalizado"></div>
-    </aside>
-    <div class="contenido-dashboard">
     
 <div class="cards">
     <div class="card card-total" id="card-total">
