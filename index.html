@@ -650,17 +650,23 @@ background:#f8fafc;
     flex:1;
 }
 .estatus-item{
-    width:16px;
-    height:16px;
-    border-radius:50%;
-    cursor:pointer;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     position:relative;
-    transition:.2s;
-    flex-shrink:0;
+    cursor:pointer;
+}
+``
+
+    .estatus-item.activo{
+    transform:scale(1.35);
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.20);
+    border-radius:50%;
 }
 
 .estatus-item:hover{
-
     transform:scale(1.25);
 }
 .estatus-item:hover{
@@ -671,7 +677,6 @@ background:#f8fafc;
     width:14px;
     height:14px;
     border-radius:50%;
-    flex-shrink:0;
 }
 .estatus-label{
     position:absolute;
@@ -688,6 +693,7 @@ background:#f8fafc;
     pointer-events:none;
     transition:.2s;
     z-index:99999;
+    box-shadow:0 6px 16px rgba(0,0,0,.20);
 }
 .estatus-item:hover .estatus-label{
     opacity:1;
@@ -1279,6 +1285,21 @@ function limpiarFiltroEstatus(){
 }
     
 function seleccionarEstatus(estatus){
+    document
+    .querySelectorAll(".estatus-item")
+    .forEach(x => x.classList.remove("activo"));
+    const mapa = {
+        REVISION_PO: ".po",
+        REVISION_TI: ".ti",
+        EJECUCION: ".ejecucion",
+        PREPARADO: ".preparado",
+        PAUSA: ".pausa",
+        CANCELADO: ".cancelado",
+        FINALIZADO: ".finalizado"
+    };
+    document
+        .querySelector(mapa[estatus])
+        ?.classList.add("activo");
     filtroEstatus = estatus;
     switch(estatus){
         case "REVISION_PO":
@@ -1333,7 +1354,6 @@ function seleccionarEstatus(estatus){
     }
     aplicarFiltros();
 }
-
 function cerrarFicha(){
     document.getElementById(
         "modalFicha"
