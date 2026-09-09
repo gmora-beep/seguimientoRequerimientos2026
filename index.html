@@ -571,6 +571,63 @@ background:#f8fafc;
     font-size:12px;
     font-weight:600;
 }
+.vista-activa{
+
+    width:220px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-top:12px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,.08);
+
+    border-left:5px solid #01244a;
+}
+
+.vista-activa-titulo{
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#0ea5c6;
+
+    margin-bottom:10px;
+}
+
+.vista-activa-numero{
+
+    font-size:42px;
+
+    font-weight:700;
+
+    color:#01244a;
+
+    line-height:1;
+}
+
+.vista-activa-nombre{
+
+    margin-top:8px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#344054;
+}
+.vista-activa-descripcion{
+    margin-top:4px;
+    font-size:12px;
+    color:#667085;
+}
 </style>
 </head>
 
@@ -601,7 +658,20 @@ background:#f8fafc;
     <p class="descripcion">
         Tablero operativo de seguimiento en tiempo real.
     </p>
-
+<div id="vistaActiva" class="vista-activa">
+    <div class="vista-activa-titulo">
+        Vista activa
+    </div>
+    <div id="vistaActivaNumero" class="vista-activa-numero">
+        0
+    </div>
+    <div id="vistaActivaNombre" class="vista-activa-nombre">
+        Total requerimientos
+    </div>
+    <div id="vistaActivaDescripcion" class="vista-activa-descripcion">
+        Iniciativas registradas
+    </div>
+</div>
 </div>
 
 <div class="cards">
