@@ -683,15 +683,7 @@ lista.forEach(item => {
     }
 </td>
 <td>
-    ${
-        item.fichaTrabajo
-            ? `<button
-                    class="btn-ficha"
-                    onclick="window.open('${item.fichaTrabajo}','_blank')">
-                    📄 Ficha
-               </button>`
-            : "-"
-    }
+    ${item.fichaTrabajo}
 </td>
 </tr>
 `;
