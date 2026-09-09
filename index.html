@@ -669,7 +669,7 @@ background:#f8fafc;
         </div>
     </div>
 
-    <div class="card card-finalizado" id="card-finalizado">
+    <div class="card card-finalizado"
         <div class="card-titulo">Finalizado</div>
         <div class="numero" id="finalizado">0</div>
         <div class="card-subtitulo">Liberado a producción</div>
@@ -1202,12 +1202,6 @@ document.getElementById("card-desarrollo")
 .addEventListener("click",()=>{
     filtroEstatus = "EJECUCION";
     activarTarjeta("card-desarrollo");
-    aplicarFiltros();
-});
-document.getElementById("card-pruebas")
-.addEventListener("click",()=>{
-    filtroEstatus = "En pruebas";
-    activarTarjeta("card-pruebas");
     aplicarFiltros();
 });
 document.getElementById("card-sprint")
