@@ -1140,6 +1140,14 @@ document.addEventListener("click", function(e){
         !e.target.closest(".card")
         &&
         !e.target.closest("#filtroNegocio")
+        &&
+        !e.target.closest(".link-requerimiento")
+        &&
+        !e.target.closest(".modal-ficha")
+        &&
+        !e.target.closest(".btn-ficha")
+        &&
+        !e.target.closest(".boton-doc")
     ){
         limpiarFiltroEstatus();
     }
