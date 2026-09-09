@@ -1085,51 +1085,52 @@ document.getElementById(
             </div>
         </div>
     </div>
-    <div class="modal-seccion">
+<div class="modal-seccion">
     <h3>
         3. Documentación
     </h3>
-<div class="ficha-docs">
-    <div class="ficha-item">
-        <label>Score PDF</label>
-        <div>
-            ${
-                item.scorePdf
-                ? `<button
-                     class="boton-doc"
-                     onclick="window.open('${item.scorePdf}','_blank')">
-                     📊
-                   </button>`
-                : "-"
-            }
+    <div class="ficha-docs">
+        <div class="ficha-item">
+            <label>Score PDF</label>
+            <div>
+                ${
+                    item.scorePdf
+                    ? `<button
+                            class="boton-doc"
+                            onclick="window.open('${item.scorePdf}','_blank')">
+                            📊
+                       </button>`
+                    : "-"
+                }
+            </div>
         </div>
-    </div>
-    <div class="ficha-item">
-        <label>Ficha de trabajo PDF</label>
-        <div>
-            ${
-                item.fichaTrabajo
-                ? `<button
-                     class="boton-doc"
-                     onclick="window.open('${item.fichaTrabajo}','_blank')">
-                     📄
-                   </button>`
-                : "-"
-            }
+        <div class="ficha-item">
+            <label>Ficha de trabajo PDF</label>
+            <div>
+                ${
+                    item.fichaTrabajo
+                    ? `<button
+                            class="boton-doc"
+                            onclick="window.open('${item.fichaTrabajo}','_blank')">
+                            📄
+                       </button>`
+                    : "-"
+                }
+            </div>
         </div>
-    </div>
-    <div class="ficha-item">
-        <label>HU</label>
-        <div>
-    ${
-    (item.hu || "").trim()
-    ? `<button
-         class="boton-doc"
-         onclick="window.open('${item.hu}','_blank')">
-         📋
-       </button>`
-    : "-"
-}
+        <div class="ficha-item">
+            <label>HU</label>
+            <div>
+                ${
+                    (item.hu || "").trim()
+                    ? `<button
+                            class="boton-doc"
+                            onclick="window.open('${item.hu}','_blank')">
+                            📋
+                       </button>`
+                    : "-"
+                }
+            </div>
         </div>
     </div>
 </div>
