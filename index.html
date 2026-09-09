@@ -620,11 +620,14 @@ background:#f8fafc;
     align-items:flex-start;
     gap:10px;
 }
+.contenido-dashboard{
+    flex:1;
+}
 .barra-estatus{
-    width:42px;
-    min-width:42px;
-    border-radius:18px;
-    padding:30px 0;
+    width:48px;
+    min-width:48px;
+    align-self:stretch;
+    border-radius:24px;
     background:linear-gradient(
         180deg,
         #01244a 0%,
@@ -634,7 +637,9 @@ background:#f8fafc;
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:14px;
+    justify-content:center;
+    gap:18px;
+    padding:20px 0;
 }
 .contenido-principal{
     flex:1;
@@ -722,7 +727,7 @@ background:#f8fafc;
 </div>
 
 <div class="layout-principal">
-    <div class="barra-estatus">
+    <aside class="barra-estatus">
         <div class="estatus-item po"></div>
         <div class="estatus-item ti"></div>
         <div class="estatus-item ejecucion"></div>
@@ -730,8 +735,8 @@ background:#f8fafc;
         <div class="estatus-item pausa"></div>
         <div class="estatus-item cancelado"></div>
         <div class="estatus-item finalizado"></div>
-    </div>
-<div class="contenido-principal">
+    </aside>
+    <div class="contenido-dashboard">
     
 <div class="cards">
     <div class="card card-total" id="card-total">
