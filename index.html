@@ -876,6 +876,8 @@ background:#f8fafc;
 <tbody id="tabla"></tbody>
 
 </table>
+    </div>
+</div>
 
 <script>
 
@@ -1436,6 +1438,8 @@ document.addEventListener("click", function(e){
         !e.target.closest(".btn-ficha")
         &&
         !e.target.closest(".boton-doc")
+        &&
+        !e.target.closest(".estatus-item")
     ){
         limpiarFiltroEstatus();
     }
