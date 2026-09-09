@@ -951,13 +951,17 @@ let datos = [];
 let listaActual = [];
 let filtroEstatus = "";
 let filtroNegocio = "";
-    
+   
 function cargarDatos(data){
-
     datos = data;
     console.log(datos);
     console.log(datos[0]);
     cargarLineasNegocio();
+    actualizarVistaActiva(
+        "Total requerimientos",
+        "Iniciativas registradas",
+        datos.length
+    );
     renderizar(data);
 }
 function cargarLineasNegocio(){
