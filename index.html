@@ -1033,14 +1033,14 @@ document.getElementById(
         ${item.estatus || "-"}
     </span>
     ${
-        item.sprint
-        ? `
+    item.sprint
+    ? `
         <span class="modal-chip chip-sprint">
-            📅 ${item.sprint || "Sin Sprint"}
-        </span>
-        : ""
-    }
-`;
+        📅 ${item.sprint || "Sin Sprint"}
+    </span>
+      `
+    : ""
+}
     document.getElementById(
         "contenidoFicha"
     ).innerHTML = `
