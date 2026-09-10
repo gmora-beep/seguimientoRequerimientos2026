@@ -944,14 +944,27 @@ function formatearFecha(fecha){
         }
     );
 }
+
 function actualizarVistaActiva(
     nombre,
     descripcion,
     total
 ){
+    document.getElementById(
+        "vistaActivaNombre"
+    ).innerText = nombre;
+    document.getElementById(
+        "vistaActivaDescripcion"
+    ).innerText = descripcion;
+    document.getElementById(
+        "vistaActivaNumero"
+    ).innerText = total;
+}
 function actualizarColorVista(clase){
     const vista =
-        document.getElementById("vistaActiva");
+        document.getElementById(
+            "vistaActiva"
+        );
     vista.classList.remove(
         "vista-po",
         "vista-ti",
@@ -962,16 +975,6 @@ function actualizarColorVista(clase){
         "vista-finalizado"
     );
     vista.classList.add(clase);
-}
-    document.getElementById(
-        "vistaActivaNombre"
-    ).innerText = nombre;
-    document.getElementById(
-        "vistaActivaDescripcion"
-    ).innerText = descripcion;
-    document.getElementById(
-        "vistaActivaNumero"
-    ).innerText = total;
 }
 function aplicarFiltros(){
     let datosKPI = [...datos];
@@ -1262,93 +1265,69 @@ function seleccionarEstatus(estatus){
         ?.classList.add("activo");
     filtroEstatus = estatus;
     switch(estatus){
-        case "REVISION_PO":
-            actualizarVistaActiva(
-                actualizarColorVista("vista-po");
-                "Revisión PO",
-                "Análisis funcional",
-                datos.filter(x => [
-                    "Pendiente de score",
-                    "Pendiente vo.bo",
-                    "En revisión con negocio",
-                    "En ideación HU",
-                    "Validación HU con negocio",
-                    "Redefinición"
-                ].includes((x.estatus || "").trim())).length
-            );
-            break;
-        case "REVISION_TI":
-            actualizarVistaActiva(
-                actualizarColorVista("vista-ti");
-                "Revisión TI",
-                "Validación técnica",
-                datos.filter(x =>
-                    (x.estatus || "").trim() === "En estructuración"
-                ).length
-            );
-            break;
-        case "EJECUCION":
-            actualizarVistaActiva(
-                actualizarColorVista("vista-ejecucion");
-                "En ejecución",
-                "Desarrollo y pruebas funcionales",
-                datos.filter(x =>
-                    [
-                        "En desarrollo",
-                        "En pruebas",
-                        "Por liberar"
-                    ].includes((x.estatus || "").trim())
-                ).length
-            );
-            break;
-        case "PREPARADO":
-            actualizarVistaActiva(
-                actualizarColorVista("vista-preparado");
-                "Preparado",
-                "Definido, pendiente ejecución",
-                datos.filter(x =>
-                    (x.estatus || "").trim() === "Listo para sprint"
-                ).length
-            );
-            break;
-        case "PAUSA":
-            actualizarVistaActiva(
-                actualizarColorVista("vista-pausa");
-                "Pausa",
-                "Planeadas para 2027",
-                datos.filter(x =>
-                    (x.estatus || "").trim() === "Pausa"
-                ).length
-            );
-            break;
-        case "CANCELADO":
-            actualizarVistaActiva(
-                actualizarColorVista("vista-cancelado");
-                "Cancelado",
-                "Iniciativas canceladas",
-                datos.filter(x =>
-                    [
-                        "Cancelado",
-                        "No autorizado"
-                    ].includes((x.estatus || "").trim())
-                ).length
-            );
-            break;
-        case "FINALIZADO":
-            actualizarVistaActiva(
-                actualizarColorVista("vista-finalizado");
-                "Finalizado",
-                "Liberado a producción",
-                datos.filter(x =>
-                    [
-                        "Concluido",
-                        "Liberado a producción"
-                    ].includes(
-                        (x.estatus || "").trim()
-                    )
-                ).length
-            );
-            break;
+case "REVISION_PO":
+    actualizarColorVista("vista-po");
+    actualizarVistaActiva(
+        "Revisión PO",
+        "Análisis funcional",
+        datos.filter(x => [
+            "Pendiente de score",
+            "Pendiente vo.bo",
+            "En revisión con negocio",
+            "En ideación HU",
+            "Validación HU con negocio",
+            "Redefinición"
+        ].includes((x.estatus || "").trim())).length
+    );
+    break;
+case "REVISION_TI":
+    actualizarColorVista("vista-ti");
+    actualizarVistaActiva(
+        "Revisión TI",
+        "Validación técnica",
+        ...
+    );
+    break;
+case "EJECUCION":
+    actualizarColorVista("vista-ejecucion");
+    actualizarVistaActiva(
+        "En ejecución",
+        "Desarrollo y pruebas funcionales",
+        ...
+    );
+    break;
+case "PREPARADO":
+    actualizarColorVista("vista-preparado");
+    actualizarVistaActiva(
+        "Preparado",
+        "Definido, pendiente ejecución",
+        ...
+    );
+    break;
+case "PAUSA":
+    actualizarColorVista("vista-pausa");
+    actualizarVistaActiva(
+        "Pausa",
+        "Planeadas para 2027",
+        ...
+    );
+    break;
+case "CANCELADO":
+    actualizarColorVista("vista-cancelado");
+    actualizarVistaActiva(
+        "Cancelado",
+        "Iniciativas canceladas",
+        ...
+    );
+    break;
+case "FINALIZADO":
+    actualizarColorVista("vista-finalizado");
+    actualizarVistaActiva(
+        "Finalizado",
+        "Liberado a producción",
+        ...
+    );
+    break;
     }
     aplicarFiltros();
 }
