@@ -169,8 +169,18 @@ h1{
     color:#004481;
 }
 .filtros{
+    display:flex;
+    gap:16px;
+    align-items:flex-end;
     margin-top:5px;
-    margin-bottom:10px;
+    margin-bottom:15px;
+}
+.bloque-filtro{
+    display:flex;
+    flex-direction:column;
+}
+.bloque-busqueda{
+    flex:1;
 }
 input{
     width:100%;
@@ -191,11 +201,11 @@ input{
 .btn-ficha:hover{
     text-decoration:underline;
 }
-#filtroNegocio{
+#filtroNegocio,
+#filtroTipo{
     display:block;
     width:320px;
     padding:8px 12px;
-    margin-bottom:12px;
     border:1px solid #d0d5dd;
     border-radius:8px;
     background:white;
@@ -204,10 +214,11 @@ input{
     font-weight:500;
 }
 #buscar{
-    display:block;
     width:100%;
-    margin-top:0;
-    margin-bottom:15px;
+    margin:0;
+    padding:8px 12px;
+    border:1px solid #d0d5dd;
+    border-radius:8px;
 }
 table{
     width:100%;
@@ -869,16 +880,36 @@ background:#f8fafc;
         </div>
 
 <div class="filtros">
-    <label class="titulo-filtro">
-        Línea de negocio
-    </label>
-    <select id="filtroNegocio">
-        <option value="">
-            Todas las líneas de negocio
-        </option>
-    </select>
+    <div class="bloque-filtro">
+        <label class="titulo-filtro">
+            Línea de negocio
+        </label>
+        <select id="filtroNegocio">
+            <option value="">
+                Todas las líneas de negocio
+            </option>
+        </select>
+    </div>
+    <div class="bloque-filtro">
+        <label class="titulo-filtro">
+            Tipo
+        </label>
+        <select id="filtroTipo">
+            <option value="">
+                Todos los tipos
+            </option>
+        </select>
+    </div>
+    <div class="bloque-filtro bloque-busqueda">
+        <label class="titulo-filtro">
+            Buscar
+        </label>
+        <input
+            id="buscar"
+            placeholder="Buscar...">
+    </div>
 </div>
-<input id="buscar" placeholder="Buscar...">
+
 <table>
 <thead>
 <tr>
@@ -903,12 +934,14 @@ let datos = [];
 let listaActual = [];
 let filtroEstatus = "";
 let filtroNegocio = "";
+let filtroTipo = "";
    
 function cargarDatos(data){
     datos = data;
     console.log(datos);
     console.log(datos[0]);
     cargarLineasNegocio();
+    cargarTipos();
     actualizarVistaActiva(
         "Total requerimientos",
         "Iniciativas registradas",
@@ -928,6 +961,22 @@ function cargarLineasNegocio(){
         combo.innerHTML += `
             <option value="${linea}">
                 ${linea}
+            </option>
+        `;
+    });
+}
+function cargarTipos(){
+    const combo =
+        document.getElementById("filtroTipo");
+    const tipos =
+        [...new Set(datos.map(x => x.tipo))];
+    combo.innerHTML =
+        '<option value="">Todos los tipos</option>';
+    tipos.forEach(tipo => {
+        if(!tipo) return;
+        combo.innerHTML += `
+            <option value="${tipo}">
+                ${tipo}
             </option>
         `;
     });
@@ -979,7 +1028,12 @@ function actualizarColorVista(clase){
 function aplicarFiltros(){
     let datosKPI = [...datos];
     if(filtroNegocio !== ""){
-        datosKPI = datosKPI.filter(item =>
+        if(filtroTipo !== ""){
+    datosKPI = datosKPI.filter(item =>
+        item.tipo === filtroTipo
+    );
+
+}        datosKPI = datosKPI.filter(item =>
             item.negocio === filtroNegocio
         );
     }
@@ -1219,10 +1273,16 @@ document.getElementById("buscar")
 document
 .getElementById("filtroNegocio")
 .addEventListener("change", function(){
+    document
+.getElementById("filtroTipo")
+.addEventListener("change", function(){
+    filtroTipo = this.value;
+    aplicarFiltros();
+});
     filtroNegocio = this.value;
     aplicarFiltros();
 });
-   
+  
 </script>
 
 <script>
