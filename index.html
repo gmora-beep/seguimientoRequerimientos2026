@@ -1300,10 +1300,18 @@ function activarTarjeta(id){
 function limpiarFiltroEstatus(){
     filtroEstatus = "";
     document
-    .querySelectorAll(".card")
-    .forEach(card => {
-        card.classList.remove("card-activa");
+    .querySelectorAll(".estatus-item")
+    .forEach(item => {
+        item.classList.remove("activo");
     });
+    document.getElementById(
+        "vistaActiva"
+    ).className = "vista-activa";
+    actualizarVistaActiva(
+        "Total requerimientos",
+        "Iniciativas registradas",
+        datos.length
+    );
     aplicarFiltros();
 }
     
