@@ -1026,17 +1026,17 @@ function actualizarColorVista(clase){
     vista.classList.add(clase);
 }
 function aplicarFiltros(){
-    let datosKPI = [...datos];
-    if(filtroNegocio !== ""){
-        if(filtroTipo !== ""){
+let datosKPI = [...datos];
+if(filtroNegocio !== ""){
+    datosKPI = datosKPI.filter(item =>
+        item.negocio === filtroNegocio
+    );
+}
+if(filtroTipo !== ""){
     datosKPI = datosKPI.filter(item =>
         item.tipo === filtroTipo
     );
-
-}        datosKPI = datosKPI.filter(item =>
-            item.negocio === filtroNegocio
-        );
-    }
+}
     let datosTabla = [...datosKPI];
 if(filtroEstatus !== ""){
     if(filtroEstatus === "REVISION_PO"){
@@ -1273,13 +1273,13 @@ document.getElementById("buscar")
 document
 .getElementById("filtroNegocio")
 .addEventListener("change", function(){
-    document
+    filtroNegocio = this.value;
+    aplicarFiltros();
+});
+document
 .getElementById("filtroTipo")
 .addEventListener("change", function(){
     filtroTipo = this.value;
-    aplicarFiltros();
-});
-    filtroNegocio = this.value;
     aplicarFiltros();
 });
   
@@ -1562,6 +1562,8 @@ document.addEventListener("click", function(e){
         !e.target.closest(".card")
         &&
         !e.target.closest("#filtroNegocio")
+        &&
+        !e.target.closest("#filtroTipo")
         &&
         !e.target.closest(".link-requerimiento")
         &&
